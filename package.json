@@ -1,0 +1,19 @@
+{
+  "name": "xyaxis",
+  "version": "1.0.0",
+  "description": "chat app",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sujitIwale/xyaxis.git"
+  },
+  "author": "Harshal Kaigaonkar And Sujit Iwale",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sujitIwale/xyaxis/issues"
+  },
+  "homepage": "https://github.com/sujitIwale/xyaxis#readme"
+}
