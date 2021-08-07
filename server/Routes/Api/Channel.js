@@ -1,15 +1,16 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable consistent-return */
 const express = require('express');
+
 const router = express.Router();
 const auth = require('../../middleware/auth');
-const cleanCache = require('../../middleware/cleanCache');
 const Room = require('../../models/RoomSchema');
 const Message = require('../../models/MessageSchema');
-const User = require('../../models/UserSchema');
 const { create, get, join, search } = require('../../controllers/channel');
 
-router.post('/create', auth, cleanCache, create);
+router.post('/create', auth, create);
 
-router.post('/join', auth, cleanCache, join);
+router.post('/join', auth, join);
 
 router.get('/', auth, get);
 
@@ -18,10 +19,9 @@ router.get('/find', auth, search);
 router.get('/getRoom', auth, async (req, res) => {
 	try {
 		const { roomname } = req.query;
-		let room = await Room.findOne({ roomname });
+		const room = await Room.findOne({ roomname });
 
-		if (!room)
-			return res.send({ error: { message: "Channel doesn't exist" } });
+		if (!room) return res.send({ error: { message: "Channel doesn't exist" } });
 
 		res.status(200).send(room);
 	} catch (err) {
@@ -33,16 +33,13 @@ router.get('/getRoom', auth, async (req, res) => {
 router.post('/message', auth, async (req, res) => {
 	try {
 		const { userId, roomname, message } = req.body;
-		let room = await Room.findOne({ roomname });
+		const room = await Room.findOne({ roomname });
 		if (!room)
-			return res
-				.status(200)
-				.send({
-					error: {
-						message:
-							'You cannot send message without being in the room!',
-					},
-				});
+			return res.status(200).send({
+				error: {
+					message: 'You cannot send message without being in the room!',
+				},
+			});
 
 		let msg = new Message({
 			roomId: room._id,
@@ -67,21 +64,19 @@ router.get('/getMessages', auth, async (req, res) => {
 	const { roomname } = req.query;
 	const userId = req.user.id;
 	try {
-		let room = await Room.findOne({
+		const room = await Room.findOne({
 			roomname,
 			users: { $elemMatch: { $eq: userId } },
 		});
 
 		if (!room)
-			return res
-				.status(203)
-				.send({
-					error: {
-						message: 'Your are not part of room. Access Denied!',
-					},
-				});
+			return res.status(203).send({
+				error: {
+					message: 'Your are not part of room. Access Denied!',
+				},
+			});
 
-		let messages = await Message.find({ roomId: room._id }).populate({
+		const messages = await Message.find({ roomId: room._id }).populate({
 			path: 'sender',
 			select: '-password',
 		});
@@ -96,7 +91,7 @@ router.get('/getMessages', auth, async (req, res) => {
 router.get('/getPublicRooms', auth, async (req, res) => {
 	const { public } = req.query;
 	try {
-		let rooms = await Room.find({ public });
+		const rooms = await Room.find({ public });
 		res.status(200).send(rooms);
 	} catch (err) {
 		console.log(err);

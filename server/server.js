@@ -1,13 +1,16 @@
 const express = require('express');
 const http = require('http');
 const cors = require('cors');
-const connectDB = require('./db/db');
 // const socketio = require('socket.io');
 
 // env configuaration
 require('dotenv').config();
 
+// database connection
+const connectDB = require('./db/db');
+
 connectDB();
+
 const app = express();
 app.use(cors());
 app.use(express.json({ extended: false }));
