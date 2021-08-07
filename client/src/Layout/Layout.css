@@ -1,0 +1,45 @@
+:root {
+    --blueLight: #9BD1F9;
+    --buttonHoverBg: #d4edff;
+    --lightGrey: rgb(59, 146, 204);
+    --spacing: 15px;
+    --greyText: rgb(101, 119, 134);
+    --greyButtonText: rgba(0,0,0,0.34);
+    --red: rgb(226,34,94);
+    --redBackground: rgba(226,34,94,0.1);
+    --green: rgb(23,191,99);
+    --greenBackground: rgba(23,191,99,0.1);
+  }
+  
+  .main_container {
+    background: #121212;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+  
+  .left_container {
+    background: #1d1c1c;
+    width: 15%;
+    height: 100%;
+  }
+  
+  .mid_container {
+    height: 100%;
+    width: 60%;
+    overflow: hidden;
+  }
+ .main-page-section {
+   height: 100%;
+ }
+  .right_container {
+    height: 100%;
+    flex: 1;
+    overflow: auto;
+    background: #1d1c1c;
+  }
+  
+  .pointer {
+    cursor: pointer;
+  }
