@@ -1,0 +1,10 @@
+.mid_home-main {
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.create-join-section {
+    display: flex;
+    flex-direction: row;
+}
