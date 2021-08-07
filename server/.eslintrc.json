@@ -26,6 +26,9 @@
         "no-process-exit": "off",
         "object-shorthand": "off",
         "class-methods-use-this": "off",
-        "jsx-quotes": "warn"
+        "jsx-quotes": "warn",
+        "consistent-return": "off",
+        "array-callback-return": "off",
+        "no-underscore-dangle": "off"
     }
 }
