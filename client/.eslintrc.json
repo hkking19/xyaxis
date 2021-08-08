@@ -23,6 +23,13 @@
     ],
     "rules": {
         "react/no-unescaped-entities": 0,
-        "arrow-body-style": "off"
+        "react/jsx-props-no-spreading": "off",
+        "react/jsx-fragments": "off",
+        "react/prop-types": "off",
+        "react/button-has-type": "off",
+        "jsx-a11y/label-has-associated-control": "off",
+        "arrow-body-style": "off",
+        "no-else-return": "off",
+        "consistent-return": "off"
     }
 }
