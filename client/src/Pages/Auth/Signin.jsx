@@ -1,7 +1,6 @@
 import React, { useState,useContext } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { isAuth } from "../../helpers/auth";
-import styles from './Auth.module.css';
 import AuthContext from '../../context/auth/AuthContext';
 import ErrorContext from '../../context/error/ErrorContext';
 import Form from "../../components/Shared/Form/Form";
