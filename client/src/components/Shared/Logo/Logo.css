@@ -1,0 +1,14 @@
+.main-logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.main-logo label {  
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+svg:hover {
+    fill:rgb(140, 104, 199) !important;
+}
