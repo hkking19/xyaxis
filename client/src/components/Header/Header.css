@@ -1,0 +1,13 @@
+/* .mid_header-main.hidden {
+    visibility: hidden;
+} */
+.mid_header-main {
+    padding: 3px;
+    background-color: #1f1f1f;
+    border-bottom: 1px solid rgb(121, 75, 196);
+    top: 0;
+}
+
+.mid_header-main .header-title {
+    margin-left: 15px;
+}
