@@ -40,7 +40,6 @@ module.exports.get = async (req, res) => {
 		const results = await Room.find({
 			users: { $elemMatch: { $eq: req.user.id } },
 		})
-			.cache({ key: req.user.id })
 			.populate('latestMessage')
 			.sort({ createdAt: '-1' });
 		res.status(200).send(results);
