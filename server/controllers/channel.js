@@ -1,5 +1,31 @@
 const Room = require('../models/RoomSchema');
 
+// getting private channels
+module.exports.get = async (req, res) => {
+	try {
+		const results = await Room.find({
+			users: { $elemMatch: { $eq: req.user.id } },
+		})
+			.populate('latestMessage')
+			.sort({ createdAt: '-1' });
+		res.status(200).send(results);
+	} catch (error) {
+		console.log(error);
+		res.status(400).send({ error: 'Error in Server!' });
+	}
+};
+
+module.exports.getPublic = async (req, res) => {
+	const { public } = req.query;
+	try {
+		const rooms = await Room.find({ public });
+		res.status(200).send(rooms);
+	} catch (err) {
+		console.log(err);
+		res.status(400).send({ error: { message: 'Error inServer!' } });
+	}
+}
+
 module.exports.create = async (req, res) => {
 	const { channelName, public, userId } = req.body;
 	if (!req.body)
@@ -34,20 +60,6 @@ module.exports.create = async (req, res) => {
 	}
 };
 
-// getting private channels
-module.exports.get = async (req, res) => {
-	try {
-		const results = await Room.find({
-			users: { $elemMatch: { $eq: req.user.id } },
-		})
-			.populate('latestMessage')
-			.sort({ createdAt: '-1' });
-		res.status(200).send(results);
-	} catch (error) {
-		console.log(error);
-		res.status(400).send({ error: 'Error in Server!' });
-	}
-};
 
 module.exports.join = async (req, res) => {
 	const { channelName, userId } = req.body;

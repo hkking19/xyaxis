@@ -1,12 +1,16 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable consistent-return */
 const express = require('express');
 
 const router = express.Router();
 const auth = require('../../middleware/auth');
 const Room = require('../../models/RoomSchema');
 const Message = require('../../models/MessageSchema');
-const { create, get, join, search } = require('../../controllers/channel');
+const {
+	create,
+	get,
+	join,
+	search,
+	getPublic,
+} = require('../../controllers/channel');
 
 router.post('/create', auth, create);
 
@@ -15,6 +19,8 @@ router.post('/join', auth, join);
 router.get('/', auth, get);
 
 router.get('/find', auth, search);
+
+router.get('/getPublicRooms', auth, getPublic);
 
 router.get('/getRoom', auth, async (req, res) => {
 	try {
@@ -85,17 +91,6 @@ router.get('/getMessages', auth, async (req, res) => {
 	} catch (err) {
 		console.log(err);
 		res.status(203).send({ error: { message: 'Error in Server!' } });
-	}
-});
-
-router.get('/getPublicRooms', auth, async (req, res) => {
-	const { public } = req.query;
-	try {
-		const rooms = await Room.find({ public });
-		res.status(200).send(rooms);
-	} catch (err) {
-		console.log(err);
-		res.status(203).send({ error: { message: 'Error inServer!' } });
 	}
 });
 
