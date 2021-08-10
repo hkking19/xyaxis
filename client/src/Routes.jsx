@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PrivateRoute from './components/Routes/PrivateRoute';
-import AuthState from './context/auth/AuthState';
-import ChannelState from './context/channel/ChannelState';
-import ErrorState from './context/error/ErrorState';
+import AuthState from './context/auth/AuthState.jsx';
+import ChannelState from './context/channel/ChannelState.jsx';
+import ErrorState from './context/error/ErrorState.jsx';
 import { verifyToken } from './helpers/auth';
 import Layout from './Layout/Layout';
 import Signin from './Pages/Auth/Signin';
