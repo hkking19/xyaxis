@@ -26,10 +26,16 @@
         "react/jsx-props-no-spreading": "off",
         "react/jsx-fragments": "off",
         "react/prop-types": "off",
+        "react/destructuring-assignment": "off",
         "react/button-has-type": "off",
+        "import/extensions": "off",
         "jsx-a11y/label-has-associated-control": "off",
         "arrow-body-style": "off",
         "no-else-return": "off",
-        "consistent-return": "off"
+        "consistent-return": "off",
+        "no-underscore-dangle": "off",
+        "func-names": "off",
+        "prefer-destructuring": "off",
+        "no-param-reassign": "off"
     }
 }

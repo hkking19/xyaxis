@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useContext, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import AuthContext from '../../context/auth/AuthContext';
@@ -31,39 +33,43 @@ const Navbar = () => {
 		<ul className='navbar'>
 			<Link to='/' style={linkStyle}>
 				<li>
-					<i className='fas fa-home white' style={isActive('/')}></i>
+					<i className='fas fa-home white' style={isActive('/')} />
 				</li>
 			</Link>
 			<Link to='/search' style={linkStyle}>
 				<li>
 					<i
 						className='fas fa-search white'
-						style={isActive('/search')}></i>
+						style={isActive('/search')}
+					/>
 				</li>
 			</Link>
 			<Link to='/chats' style={linkStyle}>
 				<li>
 					<i
 						className='far fa-comments white'
-						style={isActive('/chats')}></i>
+						style={isActive('/chats')}
+					/>
 				</li>
 			</Link>
 			<Link to='/notification' style={linkStyle}>
 				<li>
 					<i
 						className='fas fa-bell white'
-						style={isActive('/notification')}></i>
+						style={isActive('/notification')}
+					/>
 				</li>
 			</Link>
 			<Link to='/profile' style={linkStyle}>
 				<li>
 					<i
 						className='fas fa-user white'
-						style={isActive('/profile')}></i>
+						style={isActive('/profile')}
+					/>
 				</li>
 			</Link>
 			<NavItem icon='fas fa-ellipsis-h white'>
-				<DropdownMenu></DropdownMenu>
+				<DropdownMenu />
 			</NavItem>
 		</ul>
 	);
