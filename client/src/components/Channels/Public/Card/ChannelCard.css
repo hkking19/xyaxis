@@ -2,7 +2,7 @@
 
 .public-channel-card {
     margin: 15px;
-    width: calc(100% - 50px);
+    width: calc(100% - 20px);
     min-height: 100px;
     background: #222222;
     padding: 20px;

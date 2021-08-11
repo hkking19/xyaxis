@@ -4,7 +4,12 @@ import Logo from '../../components/Shared/Logo/Logo';
 
 const Left = () => {
 	const styles = {
-		margin: '20px 0 0 40px',
+		margin: '10px 0 0 12px',
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+		// height: '30px',
+		// width: '30px',
 	};
 	return (
 		<>

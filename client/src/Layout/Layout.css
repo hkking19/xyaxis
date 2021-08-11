@@ -12,7 +12,6 @@
   }
   
   .main_container {
-    background: #121212;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -20,14 +19,15 @@
   }
   
   .left_container {
-    background: #1d1c1c;
-    width: 15%;
+    background: rgb(7, 13, 26);
+    width: 105px;
     height: 100%;
   }
   
   .mid_container {
+    background: rgb(17, 17, 17);
     height: 100%;
-    width: 60%;
+    width: 70%;
     overflow: hidden;
   }
  .main-page-section {
@@ -37,7 +37,7 @@
     height: 100%;
     flex: 1;
     overflow: auto;
-    background: #1d1c1c;
+    background: rgb(11, 19, 36);
   }
   
   .pointer {

@@ -35,7 +35,7 @@ const PrivateChannel = () => {
 
 	return (
 		<Fragment>
-			<Title title='Private Channels' />
+			{/* <Title title='Private Channels' /> */}
 			{getChannels()}
 		</Fragment>
 	);
