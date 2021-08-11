@@ -8,8 +8,8 @@ const PublicChannels = () => {
     const channelContext = useContext(ChannelContext)
     const {publicChannels,getAllPublicChannels,searchedChannels,searching} = channelContext;
     useEffect(() => {
-        getAllPublicChannels()
-    },[getAllPublicChannels])
+		getAllPublicChannels();
+	}, []);
 
     const getChannels = () => {
         if(typeof searchedChannels !== 'string' && searchedChannels.length > 0) {

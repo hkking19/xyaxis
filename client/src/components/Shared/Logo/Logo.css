@@ -2,13 +2,14 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
 }
 .main-logo label {  
     margin-left: 10px;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 18px;
 }
 
 svg:hover {
-    fill:rgb(140, 104, 199) !important;
+    fill:rgb(130, 83, 204) !important;
 }

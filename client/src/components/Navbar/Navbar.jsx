@@ -10,7 +10,7 @@ function NavItem(props) {
 	const [open, setOpen] = useState(false);
 
 	return (
-		<li className='nav-item'>
+		<li>
 			<label href='#' className=' pointer' onClick={() => setOpen(!open)}>
 				<i className={props.icon} />
 			</label>
@@ -96,10 +96,10 @@ function DropdownMenu() {
 	}
 
 	return (
-		<div className='dropdown' style={{ height: 180 }}>
+		<div className='dropdown' style={{ height: 160 }}>
 			<div className='menu'>
 				<DropdownItem leftIcon={<i className='fas fa-user white' />}>
-					My Profile
+					Profile
 				</DropdownItem>
 				<DropdownItem leftIcon={<CogIcon />}>settings</DropdownItem>
 				<DropdownItem
