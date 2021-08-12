@@ -1,7 +1,10 @@
 const jwt = require('jsonwebtoken');
 // const mongoose = require('mongoose');
+const { OAuth2Client } = require('google-auth-library');
 const User = require('../models/UserSchema');
 const { hashPassword, checkPassword } = require('../services/hash');
+
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 module.exports.verifyToken = async (req, res) => {
 	try {
@@ -79,3 +82,48 @@ module.exports.signin = async (req, res) => {
 		res.status(500).send({ error: error.message });
 	}
 };
+
+module.exports.googleAuth = async (req, res) => {
+	const { tokenId } = req.body;
+
+	const data = await client.verifyIdToken({
+		idToken: tokenId,
+		audience: process.env.GOOGLE_CLIENT_ID
+	});
+
+	// eslint-disable-next-line camelcase
+	const {email_verified, email } = data.payload;
+
+	try {
+		// eslint-disable-next-line camelcase
+		if(!email_verified) return res.status(404).json({ error: `User with email: ${email} does not exists` });
+
+		const user = await User.findOne({ email });
+		
+		if (!user) {
+			const newUser = new User({
+				name: data.payload.name,
+				email,
+				username: data.payload.given_name,
+				password: '',
+				image: data.payload.picture,
+			});
+			await newUser.save();
+		}
+
+		const payload = {
+			user: {
+				id: user.id,
+			},
+		};
+		
+		const token = jwt.sign(payload, process.env.JWTSECRET, {
+			expiresIn: '7d',
+		});
+
+		return res.status(200).send({ token });
+	} catch (error) {
+		console.log(error.message);
+		res.status(500).send({ error: error.message });
+	}
+}

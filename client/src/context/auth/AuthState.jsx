@@ -1,4 +1,4 @@
-import React, { useReducer,useContext } from 'react';
+import React, { useReducer, useContext } from 'react';
 import axios from 'axios';
 import AuthContext from './AuthContext';
 import AuthReducer from './AuthReducer';
@@ -12,7 +12,7 @@ import { authenticate, getCookie, setCookie, unAuthenticate } from '../../helper
 const AuthState = (props) => {
 
     const errorContext = useContext(ErrorContext);
-    const {Seterror} = errorContext;
+    const { Seterror } = errorContext;
 
     const initialState = {
         isAuthenticated: false,
@@ -26,7 +26,7 @@ const AuthState = (props) => {
 
     const loadUser = async () => {
         const token = getCookie('token')
-        if(token) {
+        if (token) {
             setAuthToken(token)
             try {
                 const res = await axios.get('http://localhost:3001/auth/');
@@ -35,11 +35,11 @@ const AuthState = (props) => {
                     dispatch({ type: GET_USER, payload: res.data });
                 }
             } catch (error) {
-            console.log(error)
-            unAuthenticate()
+                console.log(error)
+                unAuthenticate()
+            }
         }
-        }
-        
+
     }
 
     const register = async (data) => {
@@ -57,15 +57,15 @@ const AuthState = (props) => {
             console.log(res)
             if (res.data) {
                 dispatch({ type: USER_REGISTER, payload: res.data.token })
-                setCookie('token',res.data.token)
+                setCookie('token', res.data.token)
                 loadUser();
                 return true;
             }
         } catch (error) {
-            if(error.response) {
+            if (error.response) {
                 const msg = {
                     message: error.response.data.error,
-                    type:'danger'
+                    type: 'danger'
                 }
                 Seterror(msg)
                 return false
@@ -87,22 +87,53 @@ const AuthState = (props) => {
             const res = await axios.post('http://localhost:3001/auth/signin', data, config);
             if (res.data) {
                 dispatch({ type: USER_LOGIN, payload: res.data.token })
-                setCookie('token',res.data.token)
+                setCookie('token', res.data.token)
                 loadUser();
                 return true;
-            }   
+            }
         } catch (error) {
-            if(error.response) {
+            if (error.response) {
                 console.log(error.response.data.error)
                 const msg = {
                     message: error.response.data.error,
-                    type:'danger'
+                    type: 'danger'
                 }
                 Seterror(msg)
                 return false
             }
         }
     }
+
+    const googleAuth = async (data) => {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        if (!data) {
+            return;
+        }
+        try {
+            const res = await axios.post('http://localhost:3001/auth/google', { tokenId: data.tokenId }, config);
+            if (res.data) {
+                dispatch({ type: USER_LOGIN, payload: res.data.token })
+                setCookie('token', res.data.token)
+                loadUser();
+                return true;
+            }
+        } catch (error) {
+            if (error.response) {
+                console.log(error.response.data.error)
+                const msg = {
+                    message: error.response.data.error,
+                    type: 'danger'
+                }
+                Seterror(msg)
+                return false
+            }
+        }
+    }
+
     const pushUser = () => {
         dispatch({ type: PUSH_USER })
     }
@@ -125,6 +156,7 @@ const AuthState = (props) => {
                 loading: state.loading,
                 register,
                 signin,
+                googleAuth,
                 pushUser,
                 removeUser,
                 logout
