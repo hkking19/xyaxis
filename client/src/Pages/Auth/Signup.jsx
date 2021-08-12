@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import axios from 'axios';
+import GoogleLogin from 'react-google-login';
 import { Link, Redirect } from 'react-router-dom';
 import Form from '../../components/Shared/Form/Form';
 import styles from './Auth.module.css';
@@ -27,10 +28,10 @@ const Signup = () => {
 	});
 
 	const authContext = useContext(AuthContext);
-	const { register } = authContext;
+	const { register, googleAuth } = authContext;
 
 	const errorContext = useContext(ErrorContext);
-	const { error } = errorContext;
+	const { error, SetError } = errorContext;
 
 	const availableStatus = () => {
 		const username = User.username.trim();
@@ -88,6 +89,14 @@ const Signup = () => {
 		});
 	};
 
+	const successResponseGoogle = async (data) => {
+		googleAuth(data);
+	}
+
+	const errorResponseGoogle = async () => {
+		SetError('Something went wrong.');
+	}
+
 	return (
 		<Auth>
 			<Form title='Sign Up'>
@@ -96,14 +105,19 @@ const Signup = () => {
 					<Alert message={error.message} type={error.type} />
 				)}
 				<div className='social-login'>
-					<button>
+					{/* <button>
 						<img
 							src='https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg'
 							alt='google'
 							width='20'
-						/>
-						<span>Google</span>
-					</button>
+						/> */}
+					<GoogleLogin
+						clientId="441930797332-t8ji6vmf2u8g0c34gjjufqqp92lrbdta.apps.googleusercontent.com"
+						buttonText="Google"
+						onSuccess={successResponseGoogle}
+						onFailure={errorResponseGoogle}
+					/>
+					{/* </button> */}
 				</div>
 				<div className='login-form'>
 					<div className='input-group'>

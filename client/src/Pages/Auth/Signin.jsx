@@ -1,8 +1,7 @@
 import React, { useState, useContext } from "react";
 import GoogleLogin from 'react-google-login';
 import { Link, Redirect } from "react-router-dom";
-import axios from "axios";
-import { isAuth, setCookie } from "../../helpers/auth";
+import { isAuth } from "../../helpers/auth";
 import AuthContext from '../../context/auth/AuthContext';
 import ErrorContext from '../../context/error/ErrorContext';
 import Form from "../../components/Shared/Form/Form";
