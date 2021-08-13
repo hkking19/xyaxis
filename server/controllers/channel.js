@@ -8,6 +8,7 @@ module.exports.get = async (req, res) => {
 		})
 			.populate('latestMessage')
 			.sort({ createdAt: '-1' });
+
 		res.status(200).send(results);
 	} catch (error) {
 		console.log(error);
@@ -18,13 +19,14 @@ module.exports.get = async (req, res) => {
 module.exports.getPublic = async (req, res) => {
 	const { public } = req.query;
 	try {
-		const rooms = await Room.find({ public });
-		res.status(200).send(rooms);
+		const channels = await Room.find({ public });
+
+		res.status(200).send(channels);
 	} catch (err) {
 		console.log(err);
 		res.status(400).send({ error: { message: 'Error inServer!' } });
 	}
-}
+};
 
 module.exports.create = async (req, res) => {
 	const { channelName, public, userId } = req.body;

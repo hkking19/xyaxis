@@ -98,7 +98,7 @@ const ChannelState = (props) => {
 		}
 	};
 
-	const getAllUsersChannels = async () => {
+	const getAllUsersChannels = async (next) => {
 		const token = getCookie('token');
 		if (token) {
 			setAuthToken(token);
@@ -108,6 +108,7 @@ const ChannelState = (props) => {
 				);
 				if (res.data) {
 					dispatch({ type: SET_CHANNELS, payload: res.data });
+					next(res.data);
 				}
 			} catch (error) {
 				console.log(error);

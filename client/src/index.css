@@ -33,6 +33,10 @@ html, body,#root {
   border: 1px solid rgb(76, 245, 60);
 }
 
+/* Image */
+.img-round {
+  border-radius: 50%;
+}
 /* .app-btn {
 
 }

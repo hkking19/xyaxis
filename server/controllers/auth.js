@@ -105,7 +105,7 @@ module.exports.googleAuth = async (req, res) => {
 				name: data.payload.name,
 				email,
 				username: data.payload.given_name,
-				password: '',
+				password: 'asdasd',
 				image: data.payload.picture,
 			});
 			await newUser.save();
@@ -113,7 +113,7 @@ module.exports.googleAuth = async (req, res) => {
 
 		const payload = {
 			user: {
-				id: user.id,
+				id: user._id,
 			},
 		};
 		

@@ -3,6 +3,7 @@
 import React, { useContext, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import AuthContext from '../../context/auth/AuthContext';
+import { isAuth } from '../../helpers/auth';
 import { ReactComponent as CogIcon } from './icons/cog.svg';
 import './Navbar.css';
 
@@ -90,7 +91,6 @@ function DropdownMenu() {
 			<p className='menu-item pointer' onClick={props.onClick}>
 				<span className='icon-button'>{props.leftIcon}</span>
 				{props.children}
-				<span className='icon-right'>{props.rightIcon}</span>
 			</p>
 		);
 	}
@@ -98,7 +98,14 @@ function DropdownMenu() {
 	return (
 		<div className='dropdown' style={{ height: 160 }}>
 			<div className='menu'>
-				<DropdownItem leftIcon={<i className='fas fa-user white' />}>
+				<DropdownItem
+					leftIcon={
+						<img
+							className='img-round dropdown-profile-img'
+							src={isAuth().image}
+							alt='user profile'
+						/>
+					}>
 					Profile
 				</DropdownItem>
 				<DropdownItem leftIcon={<CogIcon />}>settings</DropdownItem>

@@ -11,14 +11,14 @@ const PrivateChannel = () => {
 
 	useEffect(() => {
 		(function () {
-			getAllUsersChannels();
-			setPrivateChannels(channels);
+			getAllUsersChannels(setPrivateChannels);
 		})();
 	}, []);
 
 	const getChannels = () => {
 		if (PrivateChannels === 'waiting') return <Loading />;
-		else if (channels <= 0) return 'Nothing Found';
+		else if (channels <= 0 && PrivateChannels !== 'waiting')
+			return 'Nothing Found';
 		else
 			return channels.length > 0 ? (
 				channels.map((channel) => (
