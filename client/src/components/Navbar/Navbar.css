@@ -75,10 +75,10 @@ ul {
     filter: brightness(1.2);
   }
   
-  .icon-button svg { 
+  .icon-button svg,.dropdown-profile-img { 
     fill: var(--text-color);
-    width: 20px;
-    height: 20px;
+    width: 22px !important;
+    height: 22px !important;
   }
   
   
@@ -157,9 +157,7 @@ ul {
     transform: translateX(0%);
     transition: all var(--speed) ease;
   }
-  .menu-secondary-exit {
-  
-  }
+
   .menu-secondary-exit-active {
     transform: translateX(110%);
     transition: all var(--speed) ease;

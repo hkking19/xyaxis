@@ -1,13 +1,8 @@
 import React, { useContext, useState } from 'react';
 import axios from 'axios';
-import GoogleLogin from 'react-google-login';
-import { Link, Redirect } from 'react-router-dom';
-import Form from '../../components/Shared/Form/Form';
+import { Link } from 'react-router-dom';
 import styles from './Auth.module.css';
 import AuthContext from '../../context/auth/AuthContext';
-import ErrorContext from '../../context/error/ErrorContext';
-import { isAuth } from '../../helpers/auth';
-import Alert from '../../components/Shared/Alert/Alert';
 import Auth from './Auth';
 
 const Signup = () => {
@@ -28,10 +23,7 @@ const Signup = () => {
 	});
 
 	const authContext = useContext(AuthContext);
-	const { register, googleAuth } = authContext;
-
-	const errorContext = useContext(ErrorContext);
-	const { error, SetError } = errorContext;
+	const { register } = authContext;
 
 	const availableStatus = () => {
 		const username = User.username.trim();
@@ -89,101 +81,72 @@ const Signup = () => {
 		});
 	};
 
-	const successResponseGoogle = async (data) => {
-		googleAuth(data);
-	}
-
-	const errorResponseGoogle = async () => {
-		SetError('Something went wrong.');
-	}
-
 	return (
-		<Auth>
-			<Form title='Sign Up'>
-				{isAuth() ? <Redirect to='/' /> : null}
-				{error.message && (
-					<Alert message={error.message} type={error.type} />
-				)}
-				<div className='social-login'>
-					{/* <button>
-						<img
-							src='https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg'
-							alt='google'
-							width='20'
-						/> */}
-					<GoogleLogin
-						clientId="441930797332-t8ji6vmf2u8g0c34gjjufqqp92lrbdta.apps.googleusercontent.com"
-						buttonText="Google"
-						onSuccess={successResponseGoogle}
-						onFailure={errorResponseGoogle}
+		<Auth formTitle='Sign Up'>
+			<div className='login-form'>
+				<div className='input-group'>
+					<label>Name</label>
+					<input
+						type='text'
+						placeholder='Enter your Name'
+						name='name'
+						onChange={onInputChange}
 					/>
-					{/* </button> */}
 				</div>
-				<div className='login-form'>
-					<div className='input-group'>
-						<label>Name</label>
-						<input
-							type='text'
-							placeholder='Enter your Name'
-							name='name'
-							onChange={onInputChange}
-						/>
-					</div>
-					<div className='input-group'>
-						<label>Email</label>
-						<input
-							type='email'
-							placeholder='Enter your Email'
-							name='email'
-							onChange={onInputChange}
-						/>
-					</div>
-					<div className='input-group'>
-						<label>Username</label>
-						<input
-							type='text'
-							placeholder='Enter Username'
-							name='username'
-							onChange={onInputChange}
-						/>
-						<h5
-							className={
-								newUserName.available === true
-									? styles.active
-									: styles.deactive
-							}>
-							{availableStatus()}
-						</h5>
-					</div>
-					<div className='input-group'>
-						<label>Password</label>
-						<input
-							type='password'
-							placeholder='Enter Password'
-							name='password'
-							onChange={onInputChange}
-						/>
-					</div>
-					<div className='input-group submit'>
-						<button
-							className='submit-btn'
-							disabled={SubmitButton.disabled}
-							onClick={onFormSubmit}>
-							<span>{SubmitButton.ButtonText}</span>
-							{SubmitButton.clicked && (
-								<img src='/images/tenor.gif' alt='dotdot' />
-							)}
-						</button>
-					</div>
-					<footer className='form-footer'>
-						<Link to='/signin'>
-							<label className='pointer'>
-								Already have an account? Sign In
-							</label>
-						</Link>
-					</footer>
+				<div className='input-group'>
+					<label>Email</label>
+					<input
+						type='email'
+						placeholder='Enter your Email'
+						name='email'
+						onChange={onInputChange}
+					/>
 				</div>
-			</Form>
+				<div className='input-group'>
+					<label>Username</label>
+					<input
+						type='text'
+						placeholder='Enter Username'
+						name='username'
+						onChange={onInputChange}
+					/>
+					<h5
+						className={
+							newUserName.available === true
+								? styles.active
+								: styles.deactive
+						}>
+						{availableStatus()}
+					</h5>
+				</div>
+				<div className='input-group'>
+					<label>Password</label>
+					<input
+						type='password'
+						placeholder='Enter Password'
+						name='password'
+						onChange={onInputChange}
+					/>
+				</div>
+				<div className='input-group submit'>
+					<button
+						className='submit-btn'
+						disabled={SubmitButton.disabled}
+						onClick={onFormSubmit}>
+						<span>{SubmitButton.ButtonText}</span>
+						{SubmitButton.clicked && (
+							<img src='/images/tenor.gif' alt='dotdot' />
+						)}
+					</button>
+				</div>
+				<footer className='form-footer'>
+					<Link to='/signin'>
+						<label className='pointer'>
+							Already have an account? Sign In
+						</label>
+					</Link>
+				</footer>
+			</div>
 		</Auth>
 	);
 };

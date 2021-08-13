@@ -1,119 +1,97 @@
 import React, { useState, useContext } from "react";
-import GoogleLogin from 'react-google-login';
-import { Link, Redirect } from "react-router-dom";
-import { isAuth } from "../../helpers/auth";
+import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/AuthContext';
 import ErrorContext from '../../context/error/ErrorContext';
-import Form from "../../components/Shared/Form/Form";
-import Alert from '../../components/Shared/Alert/Alert';
-import Auth from "./Auth";
+import Form from '../../components/Shared/Form/Form';
+import Auth from './Auth';
 
 const Signin = () => {
-  const [User, setUser] = useState({
-    email: "",
-    password: "",
-  });
+	const [User, setUser] = useState({
+		email: '',
+		password: '',
+	});
 
-  const [SubmitButton, setSubmitButton] = useState({
-    ButtonText: "Sign In",
-    clicked: false,
-    disabled: false,
-  });
+	const [SubmitButton, setSubmitButton] = useState({
+		ButtonText: 'Sign In',
+		clicked: false,
+		disabled: false,
+	});
 
-  const authContext = useContext(AuthContext);
-  const { signin, googleAuth } = authContext;
+	const authContext = useContext(AuthContext);
+	const { signin, googleAuth } = authContext;
 
-  const errorContext = useContext(ErrorContext);
-  const { error, SetError } = errorContext;
+	const errorContext = useContext(ErrorContext);
+	const { error, SetError } = errorContext;
 
-  const onInputChange = (e) => {
-    setUser({ ...User, [e.target.name]: e.target.value });
-  };
+	const onInputChange = (e) => {
+		setUser({ ...User, [e.target.name]: e.target.value });
+	};
 
-  const onFormSubmit = async () => {
-    const data = {
-      email: User.email.trim(),
-      password: User.password.trim()
-    };
-    setSubmitButton({ ButtonText: "Signing In", clicked: true, disabled: true, });
-    const res = await signin(data)
-    if (res) {
-      return setUser({ email: '', password: '' })
-    } else {
-      setSubmitButton({ ButtonText: 'Sign In', clicked: false, disabled: false })
-    }
-  };
+	const onFormSubmit = async () => {
+		const data = {
+			email: User.email.trim(),
+			password: User.password.trim(),
+		};
+		setSubmitButton({
+			ButtonText: 'Signing In',
+			clicked: true,
+			disabled: true,
+		});
+		const res = await signin(data);
+		if (res) {
+			return setUser({ email: '', password: '' });
+		} else {
+			setSubmitButton({
+				ButtonText: 'Sign In',
+				clicked: false,
+				disabled: false,
+			});
+		}
+	};
 
-  const successResponseGoogle = async (data) => {
-    googleAuth(data);
-  }
-
-  const errorResponseGoogle = async () => {
-    SetError('Something went wrong.');
-  }
-
-
-  return (
-    <Auth>
-      <Form title="Sign In">
-        {isAuth() ? <Redirect to="/" /> : null}
-        {error.message && <Alert message={error.message} type={error.type} />}
-        <div className="social-login">
-          {/* <button>
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-              alt="google"
-              width="20"
-            /> */}
-          <GoogleLogin
-            clientId="441930797332-t8ji6vmf2u8g0c34gjjufqqp92lrbdta.apps.googleusercontent.com"
-            buttonText="Google"
-            onSuccess={successResponseGoogle}
-            onFailure={errorResponseGoogle}
-          />
-          {/* </button> */}
-        </div>
-        <div className="login-form">
-          <div className="input-group">
-            <label>Email</label>
-            <input
-              type="text"
-              placeholder="Email"
-              name="email"
-              onChange={onInputChange}
-            />
-          </div>
-          <div className="input-group">
-            <label>Password</label>
-            <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              onChange={onInputChange}
-            />
-          </div>
-          <div className="input-group submit">
-            <button
-              className="submit-btn"
-              disabled={SubmitButton.disabled}
-              onClick={onFormSubmit}
-            >
-              <span>{SubmitButton.ButtonText}</span>
-              {SubmitButton.clicked && (
-                <img src="/images/tenor.gif" alt="dotdot" />
-              )}
-            </button>
-          </div>
-          <footer className="form-footer">
-            Forgot Password
-            <Link to="/signup">
-              <label className="pointer">Don't have an account? Sign Up</label>
-            </Link>
-          </footer>
-        </div>
-      </Form>
-    </Auth>
-  );
+	return (
+		<Auth formTitle='Sign In'>
+			<div className='login-form'>
+				<div className='input-group'>
+					<label>Email</label>
+					<input
+						type='text'
+						placeholder='Email'
+						name='email'
+						onChange={onInputChange}
+					/>
+				</div>
+				<div className='input-group'>
+					<label>Password</label>
+					<input
+						type='password'
+						placeholder='Password'
+						name='password'
+						onChange={onInputChange}
+					/>
+				</div>
+				<div className='input-group submit'>
+					<button
+						className='submit-btn'
+						disabled={SubmitButton.disabled}
+						onClick={onFormSubmit}>
+						<span>{SubmitButton.ButtonText}</span>
+						{SubmitButton.clicked && (
+							<img src='/images/tenor.gif' alt='dotdot' />
+						)}
+					</button>
+				</div>
+				<footer className='form-footer'>
+					Forgot Password
+					<Link to='/signup'>
+						<label className='pointer'>
+							Don't have an account? Sign Up
+						</label>
+					</Link>
+				</footer>
+			</div>
+		</Auth>
+	);
 };
 
 export default Signin;
