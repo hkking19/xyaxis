@@ -1,9 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import './ChatInput.css';
+import { isAuth } from '../../../../helpers/auth';
 
-const ChatInput = () => {
+const ChatInput = ({ channelId }) => {
+	const [message, setMessage] = useState('');
+	const onInputChange = (e) => {
+		setMessage(e.target.value);
+	};
+	const msgSubmit = async () => {
+		const payload = {
+			message,
+			userId: isAuth() && isAuth()._id,
+			channelId,
+		};
+		const res = await axios.post(
+			'http://localhost:3001/api/channel/message',
+			payload
+		);
+		console.log(res);
+	};
 	return (
-		<div className='chat-form'>
+		<div className='chat-input-main'>
 			<div className='action-btn'>
 				<i className='far fa-smile icon-block' />
 				<div className='file-share'>
@@ -11,7 +29,12 @@ const ChatInput = () => {
 					<i className='fas fa-paperclip icon-block' />
 				</div>
 			</div>
-			<input className='chat-input' placeholder='Message' />
+			<input
+				className='chat-input'
+				placeholder='Message'
+				onChange={onInputChange}
+			/>
+			<button onClick={msgSubmit}>send</button>
 		</div>
 	);
 };

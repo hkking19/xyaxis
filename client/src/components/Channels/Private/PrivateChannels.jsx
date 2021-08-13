@@ -24,6 +24,7 @@ const PrivateChannel = () => {
 				channels.map((channel) => (
 					<ChannelCard
 						key={channel._id}
+						channelId={channel._id}
 						channelName={channel.roomname}
 						members={channel.users.length}
 					/>

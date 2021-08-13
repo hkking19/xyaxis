@@ -1,7 +1,7 @@
 const express = require('express');
 const http = require('http');
 const cors = require('cors');
-// const socketio = require('socket.io');
+const socketio = require('socket.io');
 
 // env configuaration
 require('dotenv').config();
@@ -17,11 +17,11 @@ app.use(express.json({ extended: false }));
 
 const PORT = process.env.PORT || 3001;
 const Server = http.createServer(app);
-// const io = socketio(Server, {
-//     cors: {
-//         origin: "http://localhost:3000",
-//     }
-// });
+const io = socketio(Server, {
+    cors: {
+        origin: 'http://localhost:3000',
+    }
+});
 
 // Routes
 app.use('/auth/', require('./Routes/Auth'));
@@ -40,7 +40,7 @@ app.use('/api/user', require('./Routes/Api/user'));
 
 // Real time communication
 // io.on('connection', (socket) => {
-//     socket.on("join user", (data) => {
+//     socket.on('join user', (data) => {
 //         // now if and only if user is joined in a room, he is able to access these connections
 //         socket.join(data.room.roomname);
 //         if (!rooms[data.room.roomname]) {
@@ -57,11 +57,11 @@ app.use('/api/user', require('./Routes/Api/user'));
 //             });
 //         }
 //         socket.to(data.room.roomname).emit('user joined', { name: data.user.name, users: rooms[data.room.roomname] });
-//         socket.on("send message", (data) => {
+//         socket.on('send message', (data) => {
 //             socket.to(data.roomname).emit('received message', data)
 //         })
 //         socket.on('disconnect', () => {
-//             let room = rooms[data.room.roomname];
+//             const room = rooms[data.room.roomname];
 //             if (room) {
 //                 const index = room.findIndex(user => user.name === data.user.name);
 //                 if (index !== -1) {
