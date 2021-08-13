@@ -29,6 +29,7 @@
     "express-validator": "^6.12.1",
     "google-auth-library": "^7.5.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.13.5"
+    "mongoose": "^5.13.5",
+    "socket.io": "^4.1.3"
   }
 }

@@ -26,12 +26,12 @@ const ChatSection = () => {
 	return (
 		<Fragment>
 			<ChatHeader />
-			<CustomScrollbars
+			{/* <CustomScrollbars
 				autoHide
 				autoHideTimeout={500}
-				autoHideDuration={200}>
-				<Chat />
-			</CustomScrollbars>
+				autoHideDuration={200}> */}
+			<Chat />
+			{/* </CustomScrollbars> */}
 			<ChatInput />
 		</Fragment>
 	);

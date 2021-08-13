@@ -4,11 +4,11 @@ const { Schema } = mongoose;
 
 const Message = mongoose.Schema(
 	{
-		roomId: {
+		channelId: {
 			type: Schema.Types.ObjectId,
 			ref: 'Room',
 		},
-		roomname: {
+		channelName: {
 			type: String,
 			required: 'true',
 		},

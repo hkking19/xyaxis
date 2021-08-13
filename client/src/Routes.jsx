@@ -40,8 +40,7 @@ const Routes = () => (
 								component={Profile}
 							/>
 							<PrivateRoute
-								exact
-								path='/chats'
+								path='/chats/:channelId'
 								component={Chats}
 							/>
 							<Route exact path='/signin'>

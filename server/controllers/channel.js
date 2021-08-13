@@ -1,4 +1,5 @@
 const Room = require('../models/RoomSchema');
+const Message = require('../models/MessageSchema');
 
 // getting private channels
 module.exports.get = async (req, res) => {
@@ -28,10 +29,36 @@ module.exports.getPublic = async (req, res) => {
 	}
 };
 
+module.exports.getChannelData = async (req, res) => {
+	try {
+		const { channeId } = req.query;
+		const channel = await Room.findOne({
+			_id: channeId,
+			users: { $elemMatch: { $eq: req.user.id } },
+		});
+
+		if (!channel)
+			return res.send({ error: 'Your are not part of room. Access Denied!' });
+
+		const messages = await Message.find({ channelId: channel._id }).populate({
+			path: 'sender',
+			select: '-password',
+		});
+
+		const data = {
+			channel,
+			messages,
+		};
+		res.status(200).send(data);
+	} catch (err) {
+		console.log(err);
+		res.status(203).send({ error: 'Error in Server!' });
+	}
+};
+
 module.exports.create = async (req, res) => {
 	const { channelName, public, userId } = req.body;
-	if (!req.body)
-		return res.status(203).send({ error: { message: 'no data found' } });
+	if (!req.body) return res.status(203).send({ error: 'no data found' });
 
 	try {
 		const users = [];
@@ -61,7 +88,6 @@ module.exports.create = async (req, res) => {
 		res.status(400).send({ error: 'Error in Server!' });
 	}
 };
-
 
 module.exports.join = async (req, res) => {
 	const { channelName, userId } = req.body;
@@ -109,5 +135,34 @@ module.exports.search = async (req, res) => {
 	} catch (error) {
 		console.log(error);
 		res.status(404).send({ error: 'Error in Server!' });
+	}
+};
+
+module.exports.message = async (req, res) => {
+	try {
+		const { userId, channelId, message } = req.body;
+		const channel = await Room.findOne({ _id: channelId });
+		if (!channel)
+			return res.status(200).send({
+				error: 'You cannot send message without being in the channle!',
+			});
+
+		let msg = new Message({
+			channelId: channel._id,
+			sender: userId,
+			channelName: channel.roomname,
+			message,
+		});
+		await msg.save();
+
+		msg = await msg
+			.populate({ path: 'sender', select: '-password' })
+			.execPopulate();
+		msg = await msg.populate('channelId').execPopulate();
+		await Room.findByIdAndUpdate(channel._id, { recentMessage: msg._id });
+		res.status(200).send(msg);
+	} catch (error) {
+		console.log(error);
+		res.status(203).send({ error: { message: 'Error in Server!' } });
 	}
 };

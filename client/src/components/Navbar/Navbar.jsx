@@ -24,7 +24,9 @@ const Navbar = () => {
 	const linkStyle = { textDecoration: 'none' };
 	const location = useLocation();
 	const isActive = (path) => {
-		if (location.pathname === path) {
+		if (path === '/' && location.pathname === '/')
+			return { color: 'rgb(140, 104, 199)' };
+		if (location.pathname.includes(path.slice(1)) && path !== '/') {
 			return { color: 'rgb(140, 104, 199)' };
 		} else {
 			return { color: '#fff' };
