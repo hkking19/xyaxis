@@ -31,9 +31,11 @@ module.exports.getPublic = async (req, res) => {
 
 module.exports.getChannelData = async (req, res) => {
 	try {
-		const { channeId } = req.query;
+		// eslint-disable-next-line prefer-const
+		let { channelId } = req.params;
+		channelId = channelId.slice(1)
 		const channel = await Room.findOne({
-			_id: channeId,
+			_id: channelId,
 			users: { $elemMatch: { $eq: req.user.id } },
 		});
 
@@ -52,7 +54,7 @@ module.exports.getChannelData = async (req, res) => {
 		res.status(200).send(data);
 	} catch (err) {
 		console.log(err);
-		res.status(203).send({ error: 'Error in Server!' });
+		res.status(400).send({ error: 'Error in Server!' });
 	}
 };
 

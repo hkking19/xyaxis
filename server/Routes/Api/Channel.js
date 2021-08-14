@@ -24,7 +24,7 @@ router.get('/find', auth, search);
 
 router.get('/getPublicRooms', auth, getPublic);
 
-router.get('/getChannel', auth, getChannelData);
+router.get('/getChannel/:channelId', auth, getChannelData);
 
 router.post('/message', auth, message);
 

@@ -37,6 +37,7 @@ const AuthState = (props) => {
             } catch (error) {
                 console.log(error)
                 unAuthenticate()
+                document.location.assign('/signin');
             }
         }
 

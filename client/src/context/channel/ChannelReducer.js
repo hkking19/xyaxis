@@ -15,7 +15,6 @@ const ChannelReducer = (state, action) => {
 			return {
 				...state,
 				Channel: action.payload,
-				Channelname: action.payload.Channelname,
 			};
 		case SET_CHANNELS:
 			return {

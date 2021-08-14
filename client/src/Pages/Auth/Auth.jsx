@@ -23,7 +23,7 @@ const Auth = ({ children, formTitle }) => {
 	};
 
 	const errorResponseGoogle = async () => {
-		SetError('Something went wrong.');
+		// SetError('Something went wrong.');
 	};
 
 	return (

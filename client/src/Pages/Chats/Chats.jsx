@@ -1,18 +1,19 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import ChatSection from '../../components/Chat/ChatSection/ChatSection';
-import setAuthToken from '../../Utils/setAuthToken';
+import ChannelContext from '../../context/channel/ChannelContext';
 
 const Chats = () => {
+	const channelContext = useContext(ChannelContext);
+	const { getChannelData, Channel } = channelContext;
 	const channelId = useParams().channelId;
-	// const [ChannelId, setChannelId] = useState(null)
-	// useEffect(() => {
-
-	// },[])
+	useEffect(() => {
+		getChannelData(channelId);
+	}, [channelId]);
 
 	return (
 		<Fragment>
-			<ChatSection channelId={channelId} />
+			<ChatSection channelId={channelId} Channel={Channel} />
 		</Fragment>
 	);
 };
