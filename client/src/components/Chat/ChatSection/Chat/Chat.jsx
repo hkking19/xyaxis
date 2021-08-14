@@ -1,55 +1,23 @@
 import React from 'react';
+import { isAuth } from '../../../../helpers/auth';
 import './Chat.css';
 
-const Chat = () => {
+const Chat = ({ messages }) => {
+	const userId = isAuth().id;
 	return (
 		<div className='chat-section'>
-			<div className='chat you'>
-				<span className='name'>Sujit</span>
-				<p className='msg'>Hello How are you</p>
-				<span className='time'>2:5</span>
-			</div>
-			<div className='chat me'>
-				<p className='msg'>Hello How are you what are you doing now </p>
-				<span className='time'>2:5</span>
-			</div>
-			<div className='chat me'>
-				<p className='msg'>Hello How are you</p>
-				<span className='time'>2:5</span>
-			</div>
-			<div className='chat me'>
-				<p className='msg'>Hello How are you</p>
-				<span className='time'>2:5</span>
-			</div>
-			<div className='chat me'>
-				<p className='msg'>Hello How are you</p>
-				<span className='time'>2:5</span>
-			</div>
-			<div className='chat me'>
-				<p className='msg'>Hello How are you</p>
-				<span className='time'>2:5</span>
-			</div>
-			<div className='chat me'>
-				<p className='msg'>Hello How are you</p>
-				<span className='time'>2:5</span>
-			</div>
-			<div className='chat me'>
-				<p className='msg'>Hello How are you</p>
-				<span className='time'>2:5</span>
-			</div>
-			<div className='chat you'>
-				<span className='name'>Sujit</span>
-				<p className='msg'>Hello not How are you</p>
-				<span className='time'>2:5</span>
-			</div>
-			<div className='chat me'>
-				<p className='msg'>Hello How are you</p>
-				<span className='time'>2:5</span>
-			</div>
-			<div className='chat you'>
-				<p className='msg'>Hello How are you</p>
-				<span className='time'>2:5</span>
-			</div>
+			{messages &&
+				messages.map((message) => (
+					<div
+						key={message._id}
+						className={`chat ${
+							userId === message.sender.id ? 'me' : 'you'
+						}`}>
+						<span className='name'>{message.sender.name}</span>
+						<p className='msg'>{message.message}</p>
+						<span className='time'>2:5</span>
+					</div>
+				))}
 		</div>
 	);
 };

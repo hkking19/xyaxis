@@ -49,6 +49,31 @@ const ChannelState = (props) => {
 		}
 	};
 
+	const getChannelData = async (channelId) => {
+		const token = getCookie('token');
+		if (token) {
+			setAuthToken(token);
+			try {
+				console.log(channelId);
+				const res = await axios.get(
+					`http://localhost:3001/api/channel/getChannel/:${channelId}`
+				);
+				if (res.data) {
+					dispatch({ type: SET_CHANNEL, payload: res.data });
+				}
+			} catch (error) {
+				if (error.response) {
+					console.log(error.response.data.error);
+					const msg = {
+						message: error.response.data.error,
+						type: 'danger',
+					};
+					Seterror(msg);
+				}
+			}
+		}
+	};
+
 	const createChannel = async (channel) => {
 		const token = getCookie('token');
 		if (token) {
@@ -179,6 +204,7 @@ const ChannelState = (props) => {
 				searchChannel,
 				setSearching,
 				removeSearchChannels,
+				getChannelData,
 			}}>
 			{props.children}
 		</ChannelContext.Provider>

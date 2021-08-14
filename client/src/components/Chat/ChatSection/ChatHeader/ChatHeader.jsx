@@ -1,7 +1,7 @@
 import React from 'react';
 import './ChatHeader.css';
 
-const ChatHeader = () => {
+const ChatHeader = ({ channel }) => {
 	return (
 		<div className='chat-header'>
 			<div className='img-container'>
@@ -12,7 +12,7 @@ const ChatHeader = () => {
 				{/* <FontAwesomeIcon className="icon-block" icon={faUser} />  */}
 			</div>
 			<div className='card-detail'>
-				<h4 className='title'>Hello Chat</h4>
+				<h4 className='title'>{channel && channel.roomname}</h4>
 				<p className='desc'>Online Last seen </p>
 			</div>
 			<div className='acion-items'>
