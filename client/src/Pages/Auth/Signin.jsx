@@ -5,6 +5,7 @@ import ErrorContext from '../../context/error/ErrorContext';
 import Auth from './Auth';
 
 const Signin = () => {
+	document.title = 'Sign In | Xyaxis';
 	const [User, setUser] = useState({
 		email: '',
 		password: '',

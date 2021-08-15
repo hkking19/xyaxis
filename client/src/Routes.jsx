@@ -44,12 +44,10 @@ const Routes = () => (
 								component={Chats}
 							/>
 							<Route exact path='/signin'>
-								{' '}
-								<Signin />{' '}
+								<Signin />
 							</Route>
 							<Route exact path='/signup'>
-								{' '}
-								<Signup />{' '}
+								<Signup />
 							</Route>
 						</Layout>
 					</Switch>

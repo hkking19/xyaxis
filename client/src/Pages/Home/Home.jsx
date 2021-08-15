@@ -9,6 +9,7 @@ import Alert from '../../components/Shared/Alert/Alert'
 
 
 const Home = () => {
+    document.title = 'Home | Xyaxis';
     const errorContext = useContext(ErrorContext)
     const {error} = errorContext;
     return (

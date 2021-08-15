@@ -12,6 +12,10 @@ const Chats = () => {
 		// eslint-disable-next-line no-restricted-globals
 	}, [channelId, location.pathname]);
 
+	document.title =
+		Channel.channel && Channel.channel.roomname
+			? `${Channel.channel.roomname}  |  Xyaxis`
+			: `Chats  |  Xyaxis`;
 	return (
 		<Fragment>
 			<ChatSection channelId={channelId} Channel={Channel} />
