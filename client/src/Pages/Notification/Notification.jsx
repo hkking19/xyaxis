@@ -2,6 +2,7 @@ import React from 'react'
 import './Notifications.css'
 
 const Notification = () => {
+    document.title = 'Notification | Xyaxis';
     return (
         <div className='notifications-main'>
             <h1>Notification</h1> 

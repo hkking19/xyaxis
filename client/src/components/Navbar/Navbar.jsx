@@ -12,7 +12,11 @@ function NavItem(props) {
 
 	return (
 		<li>
-			<label href='#' className=' pointer' onClick={() => setOpen(!open)}>
+			<label
+				href='#'
+				className=' pointer'
+				onClick={() => setOpen(!open)}
+				onAuxClick={() => setOpen(!open)}>
 				<i className={props.icon} />
 			</label>
 			{open && props.children}
@@ -100,16 +104,18 @@ function DropdownMenu() {
 	return (
 		<div className='dropdown' style={{ height: 160 }}>
 			<div className='menu'>
-				<DropdownItem
-					leftIcon={
-						<img
-							className='img-round dropdown-profile-img'
-							src={isAuth().image}
-							alt='user profile'
-						/>
-					}>
-					Profile
-				</DropdownItem>
+				<Link to='/profile'>
+					<DropdownItem
+						leftIcon={
+							<img
+								className='img-round dropdown-profile-img'
+								src={isAuth().image}
+								alt='user profile'
+							/>
+						}>
+						Profile
+					</DropdownItem>
+				</Link>
 				<DropdownItem leftIcon={<CogIcon />}>settings</DropdownItem>
 				<DropdownItem
 					leftIcon={<i className='fas fa-sign-out-alt' />}

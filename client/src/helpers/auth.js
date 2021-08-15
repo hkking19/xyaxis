@@ -54,6 +54,8 @@ export const verifyToken = async () => {
 			console.log(error);
 			unAuthenticate();
 		}
+	} else {
+		unAuthenticate()
 	}
 };
 
