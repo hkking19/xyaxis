@@ -23,11 +23,18 @@ const PublicChannels = () => {
         if(typeof searchedChannels === 'string') {
             return searchedChannels
         } else {
-            return (
-                getChannels().length > 0 ?  (getChannels().map(channel => (
-                    <ChannelListCard key={channel._id} channelName={channel.roomname} members={channel.users.length} />
-                ))) : <Loading />
-            )
+            return getChannels().length > 0 ? (
+				getChannels().map((channel) => (
+					<ChannelListCard
+						key={channel._id}
+						channelId={channel._id}
+						channelName={channel.roomname}
+						members={channel.users.length}
+					/>
+				))
+			) : (
+				<Loading />
+			);
         }
     }
 

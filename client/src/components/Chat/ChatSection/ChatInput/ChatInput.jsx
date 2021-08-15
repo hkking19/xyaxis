@@ -18,7 +18,6 @@ const ChatInput = ({ channelId }) => {
 			'http://localhost:3001/api/channel/message',
 			payload
 		);
-		console.log(res);
 	};
 	return (
 		<div className='chat-input-main'>
@@ -34,7 +33,9 @@ const ChatInput = ({ channelId }) => {
 				placeholder='Message'
 				onChange={onInputChange}
 			/>
-			<button onClick={msgSubmit}>send</button>
+			<button className='' onClick={msgSubmit}>
+				<i className='fas fa-paper-plane' />
+			</button>
 		</div>
 	);
 };
