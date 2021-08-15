@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/AuthContext';
 import ErrorContext from '../../context/error/ErrorContext';
-import Form from '../../components/Shared/Form/Form';
 import Auth from './Auth';
 
 const Signin = () => {
