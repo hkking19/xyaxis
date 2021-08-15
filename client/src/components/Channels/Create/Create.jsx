@@ -30,7 +30,7 @@ const Create = () => {
         }
     }
     const onSubmit = () => {
-        if(Channel.channelName === '') return
+        if (Channel.channelName === '') return;
         createChannel(Channel)
     }
     return (

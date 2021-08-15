@@ -25,7 +25,7 @@ module.exports.getPublic = async (req, res) => {
 		res.status(200).send(channels);
 	} catch (err) {
 		console.log(err);
-		res.status(400).send({ error: { message: 'Error inServer!' } });
+		res.status(400).send({ error: 'Error inServer!' });
 	}
 };
 
@@ -33,14 +33,16 @@ module.exports.getChannelData = async (req, res) => {
 	try {
 		// eslint-disable-next-line prefer-const
 		let { channelId } = req.params;
-		channelId = channelId.slice(1)
+		channelId = channelId.slice(1);
 		const channel = await Room.findOne({
 			_id: channelId,
 			users: { $elemMatch: { $eq: req.user.id } },
 		});
 
 		if (!channel)
-			return res.send({ error: 'Your are not part of room. Access Denied!' });
+			return res
+				.status(400)
+				.send({ error: 'Your are not part of room. Access Denied!' });
 
 		const messages = await Message.find({ channelId: channel._id }).populate({
 			path: 'sender',

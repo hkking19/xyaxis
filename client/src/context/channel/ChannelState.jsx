@@ -54,7 +54,6 @@ const ChannelState = (props) => {
 		if (token) {
 			setAuthToken(token);
 			try {
-				console.log(channelId);
 				const res = await axios.get(
 					`http://localhost:3001/api/channel/getChannel/:${channelId}`
 				);
@@ -62,6 +61,7 @@ const ChannelState = (props) => {
 					dispatch({ type: SET_CHANNEL, payload: res.data });
 				}
 			} catch (error) {
+				document.location.assign(`/`);
 				if (error.response) {
 					console.log(error.response.data.error);
 					const msg = {
@@ -80,13 +80,13 @@ const ChannelState = (props) => {
 			setAuthToken(token);
 			try {
 				channel.userId = isAuth()._id;
-				console.log(channel);
 				const res = await axios.post(
 					'http://localhost:3001/api/channel/create',
 					channel
 				);
-				const data = res.data;
-				console.log(data);
+				if (res.data) {
+					document.location.assign(`/chats/${res.data._id}`);
+				}
 			} catch (error) {
 				if (error.response) {
 					const msg = {
@@ -100,7 +100,7 @@ const ChannelState = (props) => {
 		}
 	};
 
-	const joinChannel = async (channelData) => {
+	const joinChannel = async (channelData, next) => {
 		const token = getCookie('token');
 		if (token) {
 			setAuthToken(token);
@@ -110,6 +110,9 @@ const ChannelState = (props) => {
 					'http://localhost:3001/api/channel/join',
 					channelData
 				);
+				if (res.data) {
+					next();
+				}
 			} catch (error) {
 				if (error.response) {
 					const msg = {

@@ -1,7 +1,6 @@
 import React, { Fragment, useContext, useEffect, useState } from 'react';
 import ChannelContext from '../../../context/channel/ChannelContext';
 import Loading from '../../Shared/Loading/Loading';
-import Title from '../../Title/Title';
 import ChannelCard from './Card/ChannelCard';
 
 const PrivateChannel = () => {

@@ -9,7 +9,8 @@ const Chats = () => {
 	const channelId = useParams().channelId;
 	useEffect(() => {
 		getChannelData(channelId);
-	}, [channelId]);
+		// eslint-disable-next-line no-restricted-globals
+	}, [channelId, location.pathname]);
 
 	return (
 		<Fragment>
