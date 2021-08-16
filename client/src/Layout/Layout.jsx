@@ -4,8 +4,7 @@ import { Scrollbars } from 'react-custom-scrollbars-2';
 import Left from '../Sections/Left/Left'
 import Right from '../Sections/Right/Right'
 import Header from '../components/Header/Header'
-import './Layout.css'
-import Chats from '../Pages/Chats/Chats';
+import './Layout.css';
 
 const renderThumb = ({ style, ...props }) => {
 	const thumbStyle = {
@@ -48,13 +47,15 @@ function getLayout(location, children) {
 					{pageName && pageName.includes('Chats') ? (
 						<Fragment>{children}</Fragment>
 					) : (
-						<CustomScrollbars
-							autoHide
-							autoHideTimeout={500}
-							autoHideDuration={200}>
+						<Fragment>
 							<Header pageName={pageName} />
-							{children}
-						</CustomScrollbars>
+							<CustomScrollbars
+								autoHide
+								autoHideTimeout={500}
+								autoHideDuration={200}>
+								{children}
+							</CustomScrollbars>
+						</Fragment>
 					)}
 				</div>
 

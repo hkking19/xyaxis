@@ -23,14 +23,14 @@ const Search = () => {
 			removeSearchChannels();
 			setSearching(false);
 		}
-	}, []);
+	}, [inputField]);
 
 	let timer;
 	function onInputChange(e) {
 		let { value } = e.target;
 		value = value.trim();
 		if (value === '') {
-			setSearching(false);
+			removeSearchChannels();
 		}
 		setinputField(value);
 		clearTimeout(timer);
