@@ -1,23 +1,17 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useContext, useState } from 'react';
+import ChannelContext from '../../../../context/channel/ChannelContext';
 import './ChatInput.css';
-import { isAuth } from '../../../../helpers/auth';
 
 const ChatInput = ({ channelId }) => {
+	const channelContext = useContext(ChannelContext);
+	const { sendMessage } = channelContext;
 	const [message, setMessage] = useState('');
 	const onInputChange = (e) => {
 		setMessage(e.target.value);
 	};
-	const msgSubmit = async () => {
-		const payload = {
-			message,
-			userId: isAuth() && isAuth()._id,
-			channelId,
-		};
-		const res = await axios.post(
-			'http://localhost:3001/api/channel/message',
-			payload
-		);
+	const msgSubmit = () => {
+		if (message === '') return;
+		sendMessage(message, channelId);
 	};
 	return (
 		<div className='chat-input-main'>

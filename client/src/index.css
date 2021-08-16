@@ -44,3 +44,19 @@ html, body,#root {
 .app-btn:hover {
   background: #0365b4;
 } */
+
+
+/*Customize Scrollbar*/
+.customize-scrollbar {
+    overflow-y: scroll;
+}
+.customize-scrollbar::-webkit-scrollbar {
+    background-color:rgb(17, 17, 17);
+    width:7px
+}
+.customize-scrollbar::-webkit-scrollbar-thumb {
+    cursor: pointer;
+    background-color:rgb(121, 75, 196);
+    border-radius:15px;
+}
+

@@ -12,11 +12,12 @@ const PublicChannels = () => {
 	}, []);
 
     const getChannels = () => {
-        if(typeof searchedChannels !== 'string' && searchedChannels.length > 0) {
-            return searchedChannels;
-        }
-        else if(searching) return [];
-        else return publicChannels;
+
+        if (!searching) return publicChannels;
+		if (typeof searchedChannels !== 'string' && searchedChannels.length > 0)
+			return searchedChannels;
+		else if (searching) return [];
+		else return publicChannels;
     }
 
     const getList = () => {
