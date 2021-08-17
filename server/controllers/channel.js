@@ -1,10 +1,10 @@
-const Room = require('../models/RoomSchema');
+const Channel = require('../models/ChannelSchema');
 const Message = require('../models/MessageSchema');
 
 // getting private channels
 module.exports.get = async (req, res) => {
 	try {
-		const results = await Room.find({
+		const results = await Channel.find({
 			users: { $elemMatch: { $eq: req.user.id } },
 		})
 			.populate('latestMessage')
@@ -20,7 +20,7 @@ module.exports.get = async (req, res) => {
 module.exports.getPublic = async (req, res) => {
 	const { public } = req.query;
 	try {
-		const channels = await Room.find({ public });
+		const channels = await Channel.find({ public });
 
 		res.status(200).send(channels);
 	} catch (err) {
@@ -34,7 +34,7 @@ module.exports.getChannelData = async (req, res) => {
 		// eslint-disable-next-line prefer-const
 		let { channelId } = req.params;
 		channelId = channelId.slice(1);
-		const channel = await Room.findOne({
+		const channel = await Channel.findOne({
 			_id: channelId,
 			users: { $elemMatch: { $eq: req.user.id } },
 		});
@@ -42,7 +42,7 @@ module.exports.getChannelData = async (req, res) => {
 		if (!channel)
 			return res
 				.status(400)
-				.send({ error: 'Your are not part of room. Access Denied!' });
+				.send({ error: 'Your are not part of channel. Access Denied!' });
 
 		const messages = await Message.find({ channelId: channel._id }).populate({
 			path: 'sender',
@@ -72,17 +72,17 @@ module.exports.create = async (req, res) => {
 		const channelData = {
 			users,
 			createdBy: userId,
-			roomname: channelName,
+			channelName,
 			messages,
 			public,
 		};
 
-		let channel = await Room.findOne({ roomname: channelName });
+		let channel = await Channel.findOne({ channelName });
 
 		if (channel !== null)
-			return res.status(400).send({ error: 'Room is already exist' });
+			return res.status(400).send({ error: 'Channel is already exist' });
 
-		channel = new Room(channelData);
+		channel = new Channel(channelData);
 
 		await channel.save();
 
@@ -99,22 +99,23 @@ module.exports.join = async (req, res) => {
 	if (!req.body) return res.status(203).send({ error: 'no data found' });
 
 	try {
-		let room = await Room.findOne({ roomname: channelName });
-		if (!room) return res.status(203).send({ error: 'Channel does not exist' });
+		let channel = await Channel.findOne({ channelName });
+		if (!channel)
+			return res.status(203).send({ error: 'Channel does not exist' });
 
-		room.users.map((user) => {
+		channel.users.map((user) => {
 			if (user === userId) {
-				return res.status(200).send(room);
+				return res.status(200).send(channel);
 			}
 		});
 
-		room = await Room.findByIdAndUpdate(
-			room._id,
+		channel = await Channel.findByIdAndUpdate(
+			channel._id,
 			{ $addToSet: { users: userId } },
 			{ new: true }
 		);
 
-		res.status(200).send(room);
+		res.status(200).send(channel);
 	} catch (error) {
 		console.log(error);
 		res.status(404).send({ error: 'Error in Server!' });
@@ -126,8 +127,8 @@ module.exports.search = async (req, res) => {
 		return res.status(203).send({ error: 'no data found' });
 
 	try {
-		const channels = await Room.find({
-			$or: [{ roomname: { $regex: req.query.search, $options: 'i' } }],
+		const channels = await Channel.find({
+			$or: [{ channelName: { $regex: req.query.search, $options: 'i' } }],
 		});
 
 		if (!channels)
@@ -145,7 +146,7 @@ module.exports.search = async (req, res) => {
 module.exports.message = async (req, res) => {
 	try {
 		const { userId, channelId, message } = req.body;
-		const channel = await Room.findOne({ _id: channelId });
+		const channel = await Channel.findOne({ _id: channelId });
 		if (!channel)
 			return res.status(200).send({
 				error: 'You cannot send message without being in the channle!',
@@ -154,7 +155,7 @@ module.exports.message = async (req, res) => {
 		let msg = new Message({
 			channelId: channel._id,
 			sender: userId,
-			channelName: channel.roomname,
+			channelName: channel.channelName,
 			message,
 		});
 		await msg.save();
@@ -163,7 +164,7 @@ module.exports.message = async (req, res) => {
 			.populate({ path: 'sender', select: '-password' })
 			.execPopulate();
 		msg = await msg.populate('channelId').execPopulate();
-		await Room.findByIdAndUpdate(channel._id, { recentMessage: msg._id });
+		await Channel.findByIdAndUpdate(channel._id, { recentMessage: msg._id });
 		res.status(200).send(msg);
 	} catch (error) {
 		console.log(error);

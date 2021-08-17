@@ -34,19 +34,34 @@ const Create = () => {
         createChannel(Channel)
     }
     return (
-        <div>
-            <MainCard styles={styles} title="Create New Channel">
-                <div style={{display:'flex',flexDirection:'row'}}>
-                    <Input onChange={handleInputChange} title='Channel Name' placeholder='Enter Channel Name' type='text' name='channelName'/>
-                    <select value={Channel.public} name="channelType" onChange={handleChange}>
-                        <option value="public">public</option>
-                        <option value="private">private</option>
-                    </select>
-                </div>
-                <Button onClick={onSubmit} text='Create' bgColor='rgb(140, 104, 199)' color='#fff'/>
-            </MainCard>
-        </div>
-    )
+		<div>
+			<MainCard styles={styles} title='Create New Channel'>
+				<div style={{ display: 'flex', flexDirection: 'row' }}>
+					<Input
+						onChange={handleInputChange}
+						title='Channel Name'
+						placeholder='Enter Channel Name'
+						type='text'
+						name='channelName'
+					/>
+					<select
+						value={Channel.public}
+						name='channelType'
+						onChange={handleChange}>
+						<option value='public'>public</option>
+						<option value='private'>private</option>
+					</select>
+				</div>
+				<Button
+					onClick={onSubmit}
+					text='Create'
+					bgColor='rgb(140, 104, 199)'
+					color='#fff'
+					brRadius='8px'
+				/>
+			</MainCard>
+		</div>
+	);
 }
 
 export default Create

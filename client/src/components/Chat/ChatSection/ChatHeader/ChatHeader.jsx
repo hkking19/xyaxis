@@ -12,7 +12,7 @@ const ChatHeader = ({ channel }) => {
 				{/* <FontAwesomeIcon className="icon-block" icon={faUser} />  */}
 			</div>
 			<div className='card-detail'>
-				<h4 className='title'>{channel && channel.roomname}</h4>
+				<h4 className='title'>{channel && channel.channelName}</h4>
 				<p className='desc'>Online Last seen </p>
 			</div>
 			<div className='acion-items'>

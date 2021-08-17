@@ -34,6 +34,7 @@ const ChannelListCard = ({ channelName, members, channelId }) => {
 					text='Join'
 					bgColor='rgb(140, 104, 199)'
 					color='#fff'
+					brRadius='8px'
 				/>
 			</div>
 		</div>
