@@ -6,7 +6,7 @@ const Message = mongoose.Schema(
 	{
 		channelId: {
 			type: Schema.Types.ObjectId,
-			ref: 'Room',
+			ref: 'Channel',
 		},
 		channelName: {
 			type: String,

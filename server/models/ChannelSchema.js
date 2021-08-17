@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const Room = mongoose.Schema(
+const Channel = mongoose.Schema(
 	{
-		roomname: {
+		channelName: {
 			type: String,
 			required: true,
 		},
@@ -37,4 +37,4 @@ const Room = mongoose.Schema(
 	{ timestamps: true }
 );
 
-module.exports = mongoose.model('Room', Room);
+module.exports = mongoose.model('Channel', Channel);

@@ -4,15 +4,14 @@
 } */
 
 .input-field input {
-    border-radius: 10px !important;
+    display: flex;
     text-align: center;
-    width: 13vw;
     padding: 4px;
     font-size: 18px;
-    border: 1px solid #262936;
+    border: none;
     color: #fff;
     outline: none;
-    background-color: #21232c;
+    background: #1b1b1b;;
     transition: background 0.5s;
     -webkit-tranistion: background 0.5s;
 }

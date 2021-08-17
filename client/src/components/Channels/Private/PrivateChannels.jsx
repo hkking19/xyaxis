@@ -24,7 +24,7 @@ const PrivateChannel = () => {
 					<ChannelCard
 						key={channel._id}
 						channelId={channel._id}
-						channelName={channel.roomname}
+						channelName={channel.channelName}
 						members={channel.users.length}
 					/>
 				))

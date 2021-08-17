@@ -4,9 +4,9 @@
     margin: 15px;
     width: calc(100% - 20px);
     min-height: 100px;
-    background: #222222;
     padding: 20px;
-    border-radius: 10px;
+    border: 0.5px solid rgb(152, 125, 196);
+    border-radius: 5px;
     display: flex;
     align-items: center;
     position: relative;
