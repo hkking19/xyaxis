@@ -13,7 +13,7 @@ const UserState = (props) => {
 
 	const [state, dispatch] = useReducer(UserReducer, initialState);
 
-	const getUser = async (username, next) => {
+	const getUser = async (username) => {
 		const token = getCookie('token');
 		if (token) {
 			setAuthToken(token);
@@ -22,7 +22,6 @@ const UserState = (props) => {
 					`http://localhost:3001/api/user/profile?username=${username}`
 				);
 				dispatch({ type: SET_USER_PROFILE, payload: res.data });
-				next(res.data.username);
 			} catch (error) {
 				if (error.response) {
 					const msg = {
