@@ -13,7 +13,11 @@ const ChatHeader = ({ channel }) => {
 			</div>
 			<div className='card-detail'>
 				<h4 className='title'>{channel && channel.channelName}</h4>
-				<p className='desc'>Online Last seen </p>
+				<p className='desc'>
+					{channel &&
+						channel.users.length > 0 &&
+						channel.users.map((user) => ` ${user.username} ,`)}
+				</p>
 			</div>
 			<div className='acion-items'>
 				<i className='fas fa-ellipsis-h white' />

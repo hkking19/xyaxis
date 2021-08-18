@@ -26,7 +26,6 @@ function NavItem(props) {
 
 const Navbar = () => {
 	const user = isAuth();
-	const linkStyle = { textDecoration: 'none' };
 	const location = useLocation();
 	const isActive = (path) => {
 		if (path === '/' && location.pathname === '/')
@@ -39,12 +38,12 @@ const Navbar = () => {
 	};
 	return (
 		<ul className='navbar'>
-			<Link to='/' style={linkStyle}>
+			<Link to='/'>
 				<li>
 					<i className='fas fa-home white' style={isActive('/')} />
 				</li>
 			</Link>
-			<Link to='/search' style={linkStyle}>
+			<Link to='/search'>
 				<li>
 					<i
 						className='fas fa-search white'
@@ -52,7 +51,7 @@ const Navbar = () => {
 					/>
 				</li>
 			</Link>
-			<Link to='/chats' style={linkStyle}>
+			<Link to='/chats'>
 				<li>
 					<i
 						className='far fa-comments white'
@@ -60,7 +59,7 @@ const Navbar = () => {
 					/>
 				</li>
 			</Link>
-			<Link to='/notification' style={linkStyle}>
+			<Link to='/notification'>
 				<li>
 					<i
 						className='fas fa-bell white'
@@ -68,7 +67,7 @@ const Navbar = () => {
 					/>
 				</li>
 			</Link>
-			<Link to={`/profile/${user && user.username}`} style={linkStyle}>
+			<Link to={`/profile/${user && user.username}`}>
 				<li>
 					<i
 						className='fas fa-user white'

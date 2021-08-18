@@ -21,12 +21,7 @@ const PrivateChannel = () => {
 		else
 			return channels.length > 0 ? (
 				channels.map((channel) => (
-					<ChannelCard
-						key={channel._id}
-						channelId={channel._id}
-						channelName={channel.channelName}
-						members={channel.users.length}
-					/>
+					<ChannelCard key={channel._id} channel={channel} />
 				))
 			) : (
 				<Loading />

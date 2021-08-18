@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { getTime } from '../../../../helpers/time';
 import './Card.css';
 
-const ChannelCard = ({ channelName, members, channelId }) => {
+const ChannelCard = ({ channel }) => {
 	return (
-		<Link to={`/chats/${channelId}`}>
+		<Link to={`/chats/${channel && channel._id}`}>
 			<div className='private-channel-card'>
 				<div className='img-container'>
 					<img
@@ -13,10 +14,16 @@ const ChannelCard = ({ channelName, members, channelId }) => {
 					/>
 				</div>
 				<div className='card-detail'>
-					<h4 className='title'>{channelName}</h4>
-					<p className='desc'>user: latest message</p>
+					<h4 className='title'>{channel && channel.channelName}</h4>
+					<p className='desc'>
+						{channel.recentMessage &&
+							`${channel.recentMessage.sender.username} : ${channel.recentMessage.message}`}
+					</p>
 				</div>
-				<div className='time'>2:15</div>
+				<div className='time'>
+					{channel.recentMessage &&
+						getTime(channel.recentMessage.createdAt)}
+				</div>
 			</div>
 		</Link>
 	);
