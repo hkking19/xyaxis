@@ -1,10 +1,21 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useContext, useEffect } from 'react';
+import { useParams } from 'react-router';
+import UserContext from '../../context/user/UserContext';
 import { isAuth } from '../../helpers/auth';
-import './Profile.css'
+import './Profile.css';
 
 const Profile = () => {
 	const user = isAuth();
-	document.title = `${user.name} | Xyaxis`;
+
+	const userContext = useContext(UserContext);
+	const { getUser, userProfile } = userContext;
+
+	const username = useParams().username;
+	useEffect(() => {
+		getUser(username, (userName) => {
+			document.title = `${userName} | Xyaxis`;
+		});
+	}, []);
 	return (
 		<Fragment>
 			<div className='profile-top'>
@@ -15,22 +26,20 @@ const Profile = () => {
 				/>
 			</div>
 			<div className='profile-bottom'>
-				<div className='profile'>
+				<div>
 					<img
 						className='profile-image'
-						src={user && user.image}
+						src={userProfile && userProfile.image}
 						alt=''
 					/>
 				</div>
 				<div className='profile-info' id='same-font'>
 					<div>
 						<p className='Name'>
-							Harshal Kaigaonkar
-							<br />
-							(User Name)
+							{userProfile && userProfile.name}
 						</p>
+						<h5>{userProfile && userProfile.username}</h5>
 						<p className='Desc'>Description</p>
-						<p className='Email'>Email</p>
 					</div>
 					<div className='status'>
 						<p id='status'>8 Followers</p>
@@ -41,6 +50,6 @@ const Profile = () => {
 			<hr />
 		</Fragment>
 	);
-}
+};
 
-            export default Profile
+export default Profile;

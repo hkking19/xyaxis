@@ -191,23 +191,27 @@ const ChannelState = (props) => {
 	};
 
 	const sendMessage = async (message, channelId) => {
-		const payload = {
-			message,
-			userId: isAuth() && isAuth()._id,
-			channelId,
-		};
-		try {
-			const res = await axios.post(
-				'http://localhost:3001/api/channel/message',
-				payload
-			);
-		} catch (error) {
-			if (error.response) {
-				const msg = {
-					message: error.response.data.error,
-					type: 'danger',
-				};
-				Seterror(msg);
+		const token = getCookie('token');
+		if (token) {
+			setAuthToken(token);
+			const payload = {
+				message,
+				userId: isAuth() && isAuth()._id,
+				channelId,
+			};
+			try {
+				const res = await axios.post(
+					'http://localhost:3001/api/channel/message',
+					payload
+				);
+			} catch (error) {
+				if (error.response) {
+					const msg = {
+						message: error.response.data.error,
+						type: 'danger',
+					};
+					Seterror(msg);
+				}
 			}
 		}
 	};

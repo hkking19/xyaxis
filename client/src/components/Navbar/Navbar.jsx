@@ -25,6 +25,7 @@ function NavItem(props) {
 }
 
 const Navbar = () => {
+	const user = isAuth();
 	const linkStyle = { textDecoration: 'none' };
 	const location = useLocation();
 	const isActive = (path) => {
@@ -67,7 +68,7 @@ const Navbar = () => {
 					/>
 				</li>
 			</Link>
-			<Link to='/profile' style={linkStyle}>
+			<Link to={`/profile/${user && user.username}`} style={linkStyle}>
 				<li>
 					<i
 						className='fas fa-user white'
@@ -76,7 +77,7 @@ const Navbar = () => {
 				</li>
 			</Link>
 			<NavItem icon='fas fa-ellipsis-h white'>
-				<DropdownMenu />
+				<DropdownMenu user={user} />
 			</NavItem>
 		</ul>
 	);
@@ -84,7 +85,7 @@ const Navbar = () => {
 
 export default Navbar;
 
-function DropdownMenu() {
+function DropdownMenu({ user }) {
 	const authContext = useContext(AuthContext);
 	const { logout } = authContext;
 	const onClick = () => {
@@ -104,12 +105,12 @@ function DropdownMenu() {
 	return (
 		<div className='dropdown' style={{ height: 160 }}>
 			<div className='menu'>
-				<Link to='/profile'>
+				<Link to={`/profile/${user && user.username}`}>
 					<DropdownItem
 						leftIcon={
 							<img
 								className='img-round dropdown-profile-img'
-								src={isAuth().image}
+								src={user && user.image}
 								alt='user profile'
 							/>
 						}>
