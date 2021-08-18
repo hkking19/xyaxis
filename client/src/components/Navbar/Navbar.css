@@ -98,6 +98,7 @@ ul {
     padding: 7px;
     overflow: hidden;
     transition: height var(--speed) ease;
+    z-index: 1;
   }
   
   .menu {

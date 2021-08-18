@@ -3,8 +3,9 @@ const express = require('express');
 const router = express.Router();
 
 // import controller
-const { availableUserName } = require('../../controllers/user');
+const { availableUserName, getProfile } = require('../../controllers/user');
 
+router.get('/profile', getProfile);
 router.get('/find/username/available', availableUserName);
 
 module.exports = router;

@@ -24,15 +24,16 @@
     height: 100%;
   }
   
+  .main-page-section {
+    height: 100%;
+  }
   .mid_container {
     background: rgb(17, 17, 17);
     height: 100%;
     width: 70%;
     overflow: hidden;
+    /* z-index: -1; */
   }
- .main-page-section {
-   height: 100%;
- }
   .right_container {
     height: 100%;
     flex: 1;
