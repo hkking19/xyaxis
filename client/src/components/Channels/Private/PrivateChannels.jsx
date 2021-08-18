@@ -33,12 +33,7 @@ const PrivateChannel = () => {
 			);
 	};
 
-	return (
-		<Fragment>
-			{/* <Title title='Private Channels' /> */}
-			{getChannels()}
-		</Fragment>
-	);
+	return getChannels();
 };
 
 export default PrivateChannel;

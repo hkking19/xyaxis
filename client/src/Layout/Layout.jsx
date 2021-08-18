@@ -33,7 +33,8 @@ const CustomScrollbars = (props) => (
 
 function getLayout(location, children) {
 	let pageName = location === '/' ? 'Home' : pages[location.slice(1)];
-	if (location.includes('chats')) pageName = 'Chats';
+	if (location.includes('chats') || location.includes('profile'))
+		pageName = 'noheader';
 	if (location === '/signup' || location === '/signin') {
 		return <Fragment>{children}</Fragment>;
 	} else {
@@ -44,7 +45,7 @@ function getLayout(location, children) {
 				</div>
 
 				<div className='mid_container'>
-					{pageName && pageName.includes('Chats') ? (
+					{pageName && pageName.includes('noheader') ? (
 						<Fragment>{children}</Fragment>
 					) : (
 						<Fragment>

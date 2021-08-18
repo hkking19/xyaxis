@@ -16,7 +16,7 @@ const Profile = () => {
 		getUser(username);
 	}, [username]);
 	return (
-		<Fragment>
+		<div className='customize-scrollbar profile-page-main'>
 			<div className='profile-top'>
 				<img
 					className='background-image'
@@ -60,7 +60,7 @@ const Profile = () => {
 			<h1>Hello</h1>
 			<h1>Hello</h1>
 			<h1>Hello</h1>
-		</Fragment>
+		</div>
 	);
 };
 

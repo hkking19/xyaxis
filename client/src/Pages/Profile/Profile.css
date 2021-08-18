@@ -1,3 +1,6 @@
+.profile-page-main {
+    overflow-x: hidden;
+}
 .profile-top {
     height: 235px;
 }

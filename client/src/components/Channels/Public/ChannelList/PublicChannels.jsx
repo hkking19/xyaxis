@@ -6,25 +6,29 @@ import ChannelListCard from '../Card/ChannelListCard'
 
 const PublicChannels = () => {
     const channelContext = useContext(ChannelContext)
-    const {publicChannels,getAllPublicChannels,searchedChannels,searching} = channelContext;
-    useEffect(() => {
+    const {
+		publicChannels,
+		getAllPublicChannels,
+		searchedChannels,
+		searching,
+	} = channelContext;
+	useEffect(() => {
 		getAllPublicChannels();
 	}, []);
 
-    const getChannels = () => {
-
-        if (!searching) return publicChannels;
+	const getChannels = () => {
+		if (!searching) return publicChannels;
 		if (typeof searchedChannels !== 'string' && searchedChannels.length > 0)
 			return searchedChannels;
 		else if (searching) return [];
 		else return publicChannels;
-    }
+	};
 
-    const getList = () => {
-        if(typeof searchedChannels === 'string') {
-            return searchedChannels
-        } else {
-            return getChannels().length > 0 ? (
+	const getList = () => {
+		if (typeof searchedChannels === 'string' && searching) {
+			return searchedChannels;
+		} else {
+			return getChannels().length > 0 ? (
 				getChannels().map((channel) => (
 					<ChannelListCard
 						key={channel._id}
@@ -36,8 +40,8 @@ const PublicChannels = () => {
 			) : (
 				<Loading />
 			);
-        }
-    }
+		}
+	};
 
     return (
         <Fragment>
