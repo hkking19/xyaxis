@@ -54,8 +54,11 @@ const AuthState = (props) => {
             return;
         }
         try {
-            const res = await axios.post('http://localhost:3001/auth/signup', data, config);
-            console.log(res)
+            const res = await axios.post(
+				'http://localhost:3001/auth/signup',
+				data,
+				config
+			);
             if (res.data) {
                 dispatch({ type: USER_REGISTER, payload: res.data.token })
                 setCookie('token', res.data.token)

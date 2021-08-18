@@ -11,11 +11,10 @@ const Profile = () => {
 	const { getUser, userProfile } = userContext;
 
 	const username = useParams().username;
+	document.title = `${username} | Xyaxis`;
 	useEffect(() => {
-		getUser(username, (userName) => {
-			document.title = `${userName} | Xyaxis`;
-		});
-	}, []);
+		getUser(username);
+	}, [username]);
 	return (
 		<Fragment>
 			<div className='profile-top'>
@@ -48,6 +47,19 @@ const Profile = () => {
 				</div>
 			</div>
 			<hr />
+			<h1>Hello</h1>
+			<h1>Hello</h1>
+			<h1>Hello</h1>
+			<h1>Hello</h1>
+			<h1>Hello</h1>
+			<h1>Hello</h1>
+			<h1>Hello</h1>
+			<h1>Hello</h1>
+			<h1>Hello</h1>
+			<h1>Hello</h1>
+			<h1>Hello</h1>
+			<h1>Hello</h1>
+			<h1>Hello</h1>
 		</Fragment>
 	);
 };
