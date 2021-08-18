@@ -12,6 +12,9 @@ html, body,#root {
   overflow-y: hidden;
 }
 /*global css*/
+a {
+  text-decoration: none;
+}
 
 /* Padding */
 .mr-1 {
