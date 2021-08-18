@@ -1,3 +1,6 @@
+.profile-page-main {
+  height: 100%;
+}
 :root {
     --blueLight: #9BD1F9;
     --buttonHoverBg: #d4edff;
@@ -24,20 +27,15 @@
     height: 100%;
   }
   
-  .main-page-section {
-    height: 100%;
-  }
   .mid_container {
     background: rgb(17, 17, 17);
     height: 100%;
     width: 70%;
     overflow: hidden;
-    /* z-index: -1; */
   }
   .right_container {
     height: 100%;
     flex: 1;
-    overflow: auto;
     background: rgb(11, 19, 36);
   }
   
