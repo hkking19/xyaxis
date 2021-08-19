@@ -1,15 +1,17 @@
 const Channel = require('../models/ChannelSchema');
 const Message = require('../models/MessageSchema');
+const User = require('../models/UserSchema');
 
 // getting private channels
 module.exports.get = async (req, res) => {
 	try {
-		const results = await Channel.find({
+		let results = await Channel.find({
 			users: { $elemMatch: { $eq: req.user.id } },
 		})
-			.populate('latestMessage')
+			.populate('recentMessage')
 			.sort({ createdAt: '-1' });
 
+		results = await User.populate(results, { path: 'recentMessage.sender' });
 		res.status(200).send(results);
 	} catch (error) {
 		console.log(error);
@@ -37,7 +39,7 @@ module.exports.getChannelData = async (req, res) => {
 		const channel = await Channel.findOne({
 			_id: channelId,
 			users: { $elemMatch: { $eq: req.user.id } },
-		});
+		}).populate('users');
 
 		if (!channel)
 			return res
