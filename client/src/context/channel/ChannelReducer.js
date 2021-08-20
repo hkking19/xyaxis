@@ -7,6 +7,7 @@ import {
 	SET_SEARCHED_CHANNELS,
 	REMOVE_SEARCHED_CHANNELS,
 	SET_SEARCHING,
+	ADD_NEW_MESSAGE,
 } from '../type';
 
 const ChannelReducer = (state, action) => {
@@ -21,10 +22,11 @@ const ChannelReducer = (state, action) => {
 				...state,
 				channels: action.payload,
 			};
-		case SET_MESSAGE:
+		case ADD_NEW_MESSAGE:
+			Array.isArray(state.Channel.messages) &&
+				state.Channel.messages.push(action.payload);
 			return {
 				...state,
-				messages: action.payload,
 			};
 		case SOCKET_CONNECTION:
 			return {

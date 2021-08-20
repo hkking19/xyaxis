@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ChannelContext from '../../../context/channel/ChannelContext';
 import Loading from '../../Shared/Loading/Loading';
 import ChannelCard from './Card/ChannelCard';
