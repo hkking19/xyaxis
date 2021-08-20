@@ -130,11 +130,7 @@ const ChannelState = (props) => {
 		}
 	};
 
-	const joinSocket = () => {
-		const socket = io('http://localhost:3000/');
-		dispatch({ type: SOCKET_CONNECTION, payload: socket });
-	};
-
+	
 	const getAllUsersChannels = async (next) => {
 		const token = getCookie('token');
 		if (token) {
@@ -215,6 +211,15 @@ const ChannelState = (props) => {
 		);
 	};
 
+	const addNewMsg = (message) => {
+		dispatch({ type: ADD_NEW_MESSAGE, payload: message });
+	};
+	const joinSocket = (socket, id) => {
+		dispatch({ type: SOCKET_CONNECTION, payload: socket });
+		console.log(socket);
+		socket.emit('join-channel', id);
+	};
+
 	const sendMessage = async (message, channelId) => {
 		const token = getCookie('token');
 		if (token) {
@@ -229,7 +234,9 @@ const ChannelState = (props) => {
 					'http://localhost:3001/api/channel/message',
 					payload
 				);
-				dispatch({ type: ADD_NEW_MESSAGE, payload: res.data });
+				addNewMsg(res.data);
+				console.log('seding message: ');
+				state.socket.emit('send-message', res.data);
 			} catch (error) {
 				if (error.response) {
 					const msg = {
@@ -264,6 +271,7 @@ const ChannelState = (props) => {
 				sendMessage,
 				joinSocket,
 				getMessageUi,
+				addNewMsg,
 			}}>
 			{props.children}
 		</ChannelContext.Provider>
