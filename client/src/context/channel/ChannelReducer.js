@@ -8,6 +8,7 @@ import {
 	REMOVE_SEARCHED_CHANNELS,
 	SET_SEARCHING,
 	ADD_NEW_MESSAGE,
+	SET_RECENT_MESSAGE,
 } from '../type';
 
 const ChannelReducer = (state, action) => {
@@ -25,6 +26,15 @@ const ChannelReducer = (state, action) => {
 		case ADD_NEW_MESSAGE:
 			Array.isArray(state.Channel.messages) &&
 				state.Channel.messages.push(action.payload);
+			return {
+				...state,
+			};
+		case SET_RECENT_MESSAGE:
+			state.channels.map((channel) => {
+				if (channel._id === action.payload.channelId._id) {
+					channel.recentMessage = action.payload;
+				}
+			});
 			return {
 				...state,
 			};

@@ -19,6 +19,7 @@ import {
 	SET_SEARCHING,
 	REMOVE_SEARCHED_CHANNELS,
 	ADD_NEW_MESSAGE,
+	SET_RECENT_MESSAGE,
 } from '../type';
 
 const ChannelState = (props) => {
@@ -130,7 +131,6 @@ const ChannelState = (props) => {
 		}
 	};
 
-	
 	const getAllUsersChannels = async (next) => {
 		const token = getCookie('token');
 		if (token) {
@@ -217,7 +217,7 @@ const ChannelState = (props) => {
 	const joinSocket = (socket, id) => {
 		dispatch({ type: SOCKET_CONNECTION, payload: socket });
 		console.log(socket);
-		socket.emit('join-channel', id);
+		socket.emit('join-channel', isAuth()._id);
 	};
 
 	const sendMessage = async (message, channelId) => {
@@ -235,7 +235,7 @@ const ChannelState = (props) => {
 					payload
 				);
 				addNewMsg(res.data);
-				console.log('seding message: ');
+				console.log(res.data);
 				state.socket.emit('send-message', res.data);
 			} catch (error) {
 				if (error.response) {
@@ -250,6 +250,10 @@ const ChannelState = (props) => {
 		}
 	};
 
+	const setRecentMessage = (message) => {
+		console.log(`${message} setting recentmsg`);
+		dispatch({ type: SET_RECENT_MESSAGE, payload: message });
+	};
 	return (
 		<ChannelContext.Provider
 			value={{
@@ -272,6 +276,7 @@ const ChannelState = (props) => {
 				joinSocket,
 				getMessageUi,
 				addNewMsg,
+				setRecentMessage,
 			}}>
 			{props.children}
 		</ChannelContext.Provider>

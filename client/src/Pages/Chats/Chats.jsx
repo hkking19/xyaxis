@@ -8,7 +8,8 @@ const socket = io('http://localhost:3001/');
 
 const Chats = () => {
 	const channelContext = useContext(ChannelContext);
-	const { getChannelData, Channel, joinSocket, addNewMsg } = channelContext;
+	const { getChannelData, Channel, joinSocket, addNewMsg, setRecentMessage } =
+		channelContext;
 	const channelId = useParams().channelId;
 	useEffect(() => {
 		getChannelData(channelId);
@@ -16,10 +17,15 @@ const Chats = () => {
 		// eslint-disable-next-line no-restricted-globals
 	}, [channelId, location.pathname]);
 
+	console.log(channelId);
 	useEffect(() => {
 		socket.on('received-message', (message) => {
-			console.log('message');
-			addNewMsg(message);
+			console.log(`current channel Id${channelId}`);
+			console.log(`${message.channelId._id}===${channelId}`);
+			if (message.channelId._id === channelId) {
+				addNewMsg(message);
+			}
+			setRecentMessage(message);
 		});
 	}, [socket]);
 	document.title =
