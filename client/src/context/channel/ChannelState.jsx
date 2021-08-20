@@ -1,9 +1,14 @@
 import React, { useReducer, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+import io from 'socket.io-client';
 import ChannelContext from './ChannelContext';
 import ChannelReducer from './ChannelReducer';
 import ErrorContext from '../error/ErrorContext';
 import setAuthToken from '../../Utils/setAuthToken';
+
+import { getCookie, isAuth } from '../../helpers/auth';
+import { getTime } from '../../helpers/time';
 
 import {
 	SET_CHANNELS,
@@ -14,7 +19,6 @@ import {
 	SET_SEARCHING,
 	REMOVE_SEARCHED_CHANNELS,
 } from '../type';
-import { getCookie, isAuth } from '../../helpers/auth';
 
 const ChannelState = (props) => {
 	const errorContext = useContext(ErrorContext);
@@ -24,7 +28,6 @@ const ChannelState = (props) => {
 		channels: [],
 		Channelname: '',
 		Channel: {},
-		messages: [],
 		publicChannels: [],
 		searchedChannels: [],
 		searching: false,
@@ -126,6 +129,11 @@ const ChannelState = (props) => {
 		}
 	};
 
+	const joinSocket = () => {
+		const socket = io('http://localhost:3000/');
+		dispatch({ type: SOCKET_CONNECTION, payload: socket })
+	}
+
 	const getAllUsersChannels = async (next) => {
 		const token = getCookie('token');
 		if (token) {
@@ -190,6 +198,18 @@ const ChannelState = (props) => {
 		dispatch({ type: REMOVE_SEARCHED_CHANNELS, payload: [] });
 	};
 
+	const getMessageUi = (message) => (
+		<div
+			key={message._id}
+			className={`chat ${isAuth()._id === message.sender._id ? 'me' : 'you'}`}>
+			<Link to={`/profile/${message.sender.username}`}>
+				<span className='name'>{message.sender.name}</span>
+			</Link>
+			<p className='msg'>{message.message}</p>
+			<span className='time'>{getTime(message.createdAt)}</span>
+		</div>
+	);
+
 	const sendMessage = async (message, channelId) => {
 		const token = getCookie('token');
 		if (token) {
@@ -204,6 +224,7 @@ const ChannelState = (props) => {
 					'http://localhost:3001/api/channel/message',
 					payload
 				);
+				addMessageToUi(res.data)
 			} catch (error) {
 				if (error.response) {
 					const msg = {
@@ -215,12 +236,16 @@ const ChannelState = (props) => {
 			}
 		}
 	};
+
+	const addMessageToUi = (message) => {
+		document.getElementsByClassName("chat-section").appendChild(getMessageUi(message));
+	}
+
 	return (
 		<ChannelContext.Provider
 			value={{
 				Channelname: state.Channelname,
 				Channel: state.Channel,
-				messages: state.messages,
 				channels: state.channels,
 				socket: state.socket,
 				publicChannels: state.publicChannels,
@@ -235,6 +260,9 @@ const ChannelState = (props) => {
 				removeSearchChannels,
 				getChannelData,
 				sendMessage,
+				joinSocket,
+				getMessageUi,
+				addMessageToUi,
 			}}>
 			{props.children}
 		</ChannelContext.Provider>
