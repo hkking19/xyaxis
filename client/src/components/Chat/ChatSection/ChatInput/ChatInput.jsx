@@ -17,6 +17,7 @@ const ChatInput = ({ channelId }) => {
 	const msgSubmit = () => {
 		if (message === '') return;
 		sendMessage(message, channelId);
+		setMessage('');
 	};
 	return (
 		<div className='chat-input-main'>

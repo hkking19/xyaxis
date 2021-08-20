@@ -18,6 +18,7 @@ import {
 	SET_SEARCHED_CHANNELS,
 	SET_SEARCHING,
 	REMOVE_SEARCHED_CHANNELS,
+	ADD_NEW_MESSAGE,
 } from '../type';
 
 const ChannelState = (props) => {
@@ -131,8 +132,8 @@ const ChannelState = (props) => {
 
 	const joinSocket = () => {
 		const socket = io('http://localhost:3000/');
-		dispatch({ type: SOCKET_CONNECTION, payload: socket })
-	}
+		dispatch({ type: SOCKET_CONNECTION, payload: socket });
+	};
 
 	const getAllUsersChannels = async (next) => {
 		const token = getCookie('token');
@@ -198,17 +199,21 @@ const ChannelState = (props) => {
 		dispatch({ type: REMOVE_SEARCHED_CHANNELS, payload: [] });
 	};
 
-	const getMessageUi = (message) => (
-		<div
-			key={message._id}
-			className={`chat ${isAuth()._id === message.sender._id ? 'me' : 'you'}`}>
-			<Link to={`/profile/${message.sender.username}`}>
-				<span className='name'>{message.sender.name}</span>
-			</Link>
-			<p className='msg'>{message.message}</p>
-			<span className='time'>{getTime(message.createdAt)}</span>
-		</div>
-	);
+	const getMessageUi = (message) => {
+		return (
+			<div
+				key={message._id}
+				className={`chat ${
+					isAuth()._id === message.sender._id ? 'me' : 'you'
+				}`}>
+				<Link to={`/profile/${message.sender.username}`}>
+					<span className='name'>{message.sender.name}</span>
+				</Link>
+				<p className='msg'>{message.message}</p>
+				<span className='time'>{getTime(message.createdAt)}</span>
+			</div>
+		);
+	};
 
 	const sendMessage = async (message, channelId) => {
 		const token = getCookie('token');
@@ -224,7 +229,7 @@ const ChannelState = (props) => {
 					'http://localhost:3001/api/channel/message',
 					payload
 				);
-				addMessageToUi(res.data)
+				dispatch({ type: ADD_NEW_MESSAGE, payload: res.data });
 			} catch (error) {
 				if (error.response) {
 					const msg = {
@@ -233,13 +238,10 @@ const ChannelState = (props) => {
 					};
 					Seterror(msg);
 				}
+				return false;
 			}
 		}
 	};
-
-	const addMessageToUi = (message) => {
-		document.getElementsByClassName("chat-section").appendChild(getMessageUi(message));
-	}
 
 	return (
 		<ChannelContext.Provider
@@ -262,7 +264,6 @@ const ChannelState = (props) => {
 				sendMessage,
 				joinSocket,
 				getMessageUi,
-				addMessageToUi,
 			}}>
 			{props.children}
 		</ChannelContext.Provider>
