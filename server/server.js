@@ -8,7 +8,7 @@ require('dotenv').config();
 
 // database connection
 const connectDB = require('./db/db');
-const socketManager= require('./services/sockets');
+const { socketManager } = require('./services/sockets');
 
 connectDB();
 

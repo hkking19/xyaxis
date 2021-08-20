@@ -4,7 +4,7 @@ import ChatHeader from './ChatHeader/ChatHeader';
 import ChatInput from './ChatInput/ChatInput';
 import './ChatSection.css';
 
-const ChatSection = ({ channelId, Channel }) => {
+const ChatSection = ({ channelId, Channel, socket }) => {
 	return (
 		<Fragment>
 			<ChatHeader channel={Channel.channel} />
