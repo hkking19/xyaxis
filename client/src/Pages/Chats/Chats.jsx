@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useContext } from 'react';
+import React, { Fragment, useEffect, useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import io from 'socket.io-client';
 import ChatSection from '../../components/Chat/ChatSection/ChatSection';
@@ -10,7 +10,7 @@ const Chats = () => {
 	const channelContext = useContext(ChannelContext);
 	const { getChannelData, Channel, joinSocket, addNewMsg, setRecentMessage } =
 		channelContext;
-	const channelId = useParams().channelId;
+	const [channelId, setchannelId] = useState(useParams().channelId)
 	useEffect(() => {
 		getChannelData(channelId);
 		joinSocket(socket, channelId);
@@ -27,7 +27,7 @@ const Chats = () => {
 			}
 			setRecentMessage(message);
 		});
-	}, [socket]);
+	}, [socket, channelId]);
 	document.title =
 		Channel.channel && Channel.channel.roomname
 			? `${Channel.channel.roomname}  |  Xyaxis`

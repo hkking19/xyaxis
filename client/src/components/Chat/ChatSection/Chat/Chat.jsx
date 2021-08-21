@@ -5,7 +5,6 @@ import './Chat.css';
 const Chat = ({ messages }) => {
 	const channelContext = useContext(ChannelContext);
 	const { getMessageUi } = channelContext;
-
 	return (
 		<div id='chat-section' className='chat-section customize-scrollbar'>
 			{messages && messages.map((message) => getMessageUi(message))}
