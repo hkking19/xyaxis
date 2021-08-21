@@ -199,9 +199,8 @@ const ChannelState = (props) => {
 		return (
 			<div
 				key={message._id}
-				className={`chat ${
-					isAuth()._id === message.sender._id ? 'me' : 'you'
-				}`}>
+				className={`chat ${isAuth()._id === message.sender._id ? 'me' : 'you'
+					}`}>
 				<Link to={`/profile/${message.sender.username}`}>
 					<span className='name'>{message.sender.name}</span>
 				</Link>
@@ -213,10 +212,10 @@ const ChannelState = (props) => {
 
 	const addNewMsg = (message) => {
 		dispatch({ type: ADD_NEW_MESSAGE, payload: message });
+		autoScroll();
 	};
 	const joinSocket = (socket, id) => {
 		dispatch({ type: SOCKET_CONNECTION, payload: socket });
-		console.log(socket);
 		socket.emit('join-channel', isAuth()._id);
 	};
 
@@ -235,7 +234,6 @@ const ChannelState = (props) => {
 					payload
 				);
 				addNewMsg(res.data);
-				console.log(res.data);
 				state.socket.emit('send-message', res.data);
 			} catch (error) {
 				if (error.response) {
@@ -254,6 +252,31 @@ const ChannelState = (props) => {
 		console.log(`${message} setting recentmsg`);
 		dispatch({ type: SET_RECENT_MESSAGE, payload: message });
 	};
+
+	const autoScroll = () => {
+		const $messages = document.querySelector('#chat-section');
+
+		// New message element
+		const $newMessage = $messages.lastElementChild;
+		// new message's height
+		const lowerMargin = getComputedStyle($newMessage).marginBottom;
+		const newMessageMargin = parseInt(lowerMargin, 10); // second parameter is a radix value to specify what number system to use (10 for decimal).
+		const newMessage = $newMessage.offsetHeight + newMessageMargin;
+
+		// // visible height
+		const visibleHeight = $messages.offsetHeight;
+
+		// // height of messages 
+		const containerHeight = $messages.scrollHeight;
+
+		// // how far to scroll
+		const scrollOffset = $messages.scrollTop + visibleHeight;
+
+		if (containerHeight - newMessage <= scrollOffset) {
+			$messages.scrollTop = $messages.scrollHeight;
+		}
+	}
+
 	return (
 		<ChannelContext.Provider
 			value={{
@@ -277,6 +300,7 @@ const ChannelState = (props) => {
 				getMessageUi,
 				addNewMsg,
 				setRecentMessage,
+				autoScroll,
 			}}>
 			{props.children}
 		</ChannelContext.Provider>
