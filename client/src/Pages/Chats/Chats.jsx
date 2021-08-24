@@ -10,7 +10,7 @@ const Chats = () => {
 	const channelContext = useContext(ChannelContext);
 	const { getChannelData, Channel, joinSocket, addNewMsg, setRecentMessage } =
 		channelContext;
-	const [channelId, setchannelId] = useState(useParams().channelId)
+	const channelId = useParams().channelId;
 	useEffect(() => {
 		getChannelData(channelId);
 		joinSocket(socket, channelId);

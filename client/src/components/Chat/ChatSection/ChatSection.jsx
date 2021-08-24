@@ -8,7 +8,7 @@ const ChatSection = ({ channelId, Channel, socket }) => {
 	return (
 		<Fragment>
 			<ChatHeader channel={Channel.channel} />
-			<Chat messages={Channel.messages} />
+			<Chat id='' messages={Channel.messages} />
 			<ChatInput channelId={channelId} />
 		</Fragment>
 	);
