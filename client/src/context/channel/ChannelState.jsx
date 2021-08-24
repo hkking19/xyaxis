@@ -254,27 +254,9 @@ const ChannelState = (props) => {
 	};
 
 	const autoScroll = () => {
-		const $messages = document.querySelector('#chat-section');
-
-		// New message element
-		const $newMessage = $messages.lastElementChild;
-		// new message's height
-		const lowerMargin = getComputedStyle($newMessage).marginBottom;
-		const newMessageMargin = parseInt(lowerMargin, 10); // second parameter is a radix value to specify what number system to use (10 for decimal).
-		const newMessage = $newMessage.offsetHeight + newMessageMargin;
-
-		// // visible height
-		const visibleHeight = $messages.offsetHeight;
-
-		// // height of messages 
-		const containerHeight = $messages.scrollHeight;
-
-		// // how far to scroll
-		const scrollOffset = $messages.scrollTop + visibleHeight;
-
-		if (containerHeight - newMessage <= scrollOffset) {
-			$messages.scrollTop = $messages.scrollHeight;
-		}
+		const messages = document.getElementById('chat-section');
+		console.log('irub')
+		messages.scroll(0, messages.scrollHeight);
 	}
 
 	return (
