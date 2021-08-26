@@ -4,7 +4,7 @@ import styles from './Button.module.css';
 const Button = ({ text, onClick, color, bgColor, brRadius }) => {
 	return (
 		<button
-			style={{ color, backgroundColor: bgColor, borderRadius: brRadius }}
+			style={{ color, borderRadius: brRadius }}
 			onClick={onClick}
 			className={styles.button}>
 			<span>{text}</span>
