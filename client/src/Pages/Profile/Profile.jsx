@@ -1,11 +1,11 @@
-import React, { Fragment, useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router';
 import UserContext from '../../context/user/UserContext';
-import { isAuth } from '../../helpers/auth';
+// import { isAuth } from '../../helpers/auth';
 import './Profile.css';
 
 const Profile = () => {
-	const user = isAuth();
+	// const user = isAuth();
 
 	const userContext = useContext(UserContext);
 	const { getUser, userProfile } = userContext;

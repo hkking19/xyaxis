@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/AuthContext';
-import ErrorContext from '../../context/error/ErrorContext';
 import Auth from './Auth';
 
 const Signin = () => {
@@ -18,10 +17,7 @@ const Signin = () => {
 	});
 
 	const authContext = useContext(AuthContext);
-	const { signin, googleAuth } = authContext;
-
-	const errorContext = useContext(ErrorContext);
-	const { error, SetError } = errorContext;
+	const { signin } = authContext;
 
 	const onInputChange = (e) => {
 		setUser({ ...User, [e.target.name]: e.target.value });

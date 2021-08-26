@@ -1,7 +1,6 @@
 import React, { useReducer, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import io from 'socket.io-client';
 import ChannelContext from './ChannelContext';
 import ChannelReducer from './ChannelReducer';
 import ErrorContext from '../error/ErrorContext';
@@ -199,8 +198,9 @@ const ChannelState = (props) => {
 		return (
 			<div
 				key={message._id}
-				className={`chat ${isAuth()._id === message.sender._id ? 'me' : 'you'
-					}`}>
+				className={`chat ${
+					isAuth()._id === message.sender._id ? 'me' : 'you'
+				}`}>
 				<Link to={`/profile/${message.sender.username}`}>
 					<span className='name'>{message.sender.name}</span>
 				</Link>
@@ -249,15 +249,14 @@ const ChannelState = (props) => {
 	};
 
 	const setRecentMessage = (message) => {
-		console.log(`${message} setting recentmsg`);
+		// console.log(`${message} setting recentmsg`);
 		dispatch({ type: SET_RECENT_MESSAGE, payload: message });
 	};
 
 	const autoScroll = () => {
 		const messages = document.getElementById('chat-section');
-		console.log('irub')
 		messages.scroll(0, messages.scrollHeight);
-	}
+	};
 
 	return (
 		<ChannelContext.Provider

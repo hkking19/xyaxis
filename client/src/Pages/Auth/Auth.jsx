@@ -16,7 +16,7 @@ const Auth = ({ children, formTitle }) => {
 	const authContext = useContext(AuthContext);
 	const { googleAuth } = authContext;
 	const errorContext = useContext(ErrorContext);
-	const { error, SetError } = errorContext;
+	const { error } = errorContext;
 
 	const successResponseGoogle = async (data) => {
 		googleAuth(data);

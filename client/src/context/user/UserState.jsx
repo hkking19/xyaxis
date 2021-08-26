@@ -24,10 +24,10 @@ const UserState = (props) => {
 				dispatch({ type: SET_USER_PROFILE, payload: res.data });
 			} catch (error) {
 				if (error.response) {
-					const msg = {
-						message: error.response.data.error,
-						type: 'danger',
-					};
+					// const msg = {
+					// 	message: error.response.data.error,
+					// 	type: 'danger',
+					// };
 				}
 				console.log(error);
 			}

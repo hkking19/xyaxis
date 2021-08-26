@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useContext, useState } from 'react';
+import React, { Fragment, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import io from 'socket.io-client';
 import ChatSection from '../../components/Chat/ChatSection/ChatSection';
@@ -17,11 +17,11 @@ const Chats = () => {
 		// eslint-disable-next-line no-restricted-globals
 	}, [channelId, location.pathname]);
 
-	console.log(channelId);
+	// console.log(channelId);
 	useEffect(() => {
 		socket.on('received-message', (message) => {
-			console.log(`current channel Id${channelId}`);
-			console.log(`${message.channelId._id}===${channelId}`);
+			// console.log(`current channel Id${channelId}`);
+			// console.log(`${message.channelId._id}===${channelId}`);
 			if (message.channelId._id === channelId) {
 				addNewMsg(message);
 			}
@@ -29,8 +29,8 @@ const Chats = () => {
 		});
 	}, [socket, channelId]);
 	document.title =
-		Channel.channel && Channel.channel.roomname
-			? `${Channel.channel.roomname}  |  Xyaxis`
+		Channel.channel && Channel.channel.channelName
+			? `${Channel.channel.channelName}  |  Xyaxis`
 			: `Chats  |  Xyaxis`;
 	return (
 		<Fragment>
