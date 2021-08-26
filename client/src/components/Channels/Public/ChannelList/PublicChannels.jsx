@@ -44,12 +44,16 @@ const PublicChannels = () => {
 	};
 
     return (
-        <Fragment>
-            {
-                getList()
-            }
-        </Fragment>
-    )
+		<div
+			style={{
+				display: 'flex',
+				justifyContent: 'center',
+				alignItems: 'center',
+				flexDirection: 'column',
+			}}>
+			{getList()}
+		</div>
+	);
 }
 
 export default PublicChannels;
