@@ -38,7 +38,7 @@ const ChannelListCard = ({ channelName, members, channelId }) => {
 		// 	/>
 		// </div>
 
-		<div className='card1 pointer'>
+		<div className='card1'>
 			<div className='title-container'>
 				<div className='img-container'>
 					<img

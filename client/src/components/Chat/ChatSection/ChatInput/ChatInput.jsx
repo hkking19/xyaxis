@@ -34,9 +34,11 @@ const ChatInput = ({ channelId }) => {
 				onChange={onInputChange}
 				value={message}
 			/>
-			<button className='' onClick={msgSubmit}>
-				<i className='fas fa-paper-plane' />
-			</button>
+			<div className='msg-send-btn'>
+				<button onClick={msgSubmit}>
+					<i className='fas fa-paper-plane' />
+				</button>
+			</div>
 		</div>
 	);
 };

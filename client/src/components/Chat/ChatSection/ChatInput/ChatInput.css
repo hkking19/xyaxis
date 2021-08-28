@@ -56,3 +56,16 @@
     z-index: 1;
     cursor: pointer;
 }
+
+
+.chat-input-main .msg-send-btn button{
+    background-color: #1a1a1a;
+    outline: none;
+    border: none;
+    font-size: 25px;
+    margin-right: 10px;
+}
+.chat-input-main .msg-send-btn button i{
+   color: rgb(140, 104, 199);
+}
+

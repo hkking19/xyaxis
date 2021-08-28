@@ -54,7 +54,7 @@ a {
     overflow-y: scroll;
 }
 .customize-scrollbar::-webkit-scrollbar {
-    background-color:rgb(17, 17, 17);
+    background-color: #0e1827;
     width:7px
 }
 .customize-scrollbar::-webkit-scrollbar-thumb {

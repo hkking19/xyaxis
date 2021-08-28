@@ -37,8 +37,6 @@ const ChannelReducer = (state, action) => {
 			state.channels = state.channels.sort((a, b) => {
 				const f = new Date(a.recentMessage.updatedAt);
 				const s = new Date(b.recentMessage.updatedAt);
-				console.log(a.recentMessage);
-				console.log(b.recentMessage);
 				return s - f;
 			});
 			return {
