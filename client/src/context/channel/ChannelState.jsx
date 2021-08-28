@@ -234,6 +234,7 @@ const ChannelState = (props) => {
 					payload
 				);
 				addNewMsg(res.data);
+				setRecentMessage(res.data);
 				state.socket.emit('send-message', res.data);
 			} catch (error) {
 				if (error.response) {
