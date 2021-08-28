@@ -9,7 +9,7 @@ module.exports.get = async (req, res) => {
 			users: { $elemMatch: { $eq: req.user.id } },
 		})
 			.populate('recentMessage')
-			.sort({ createdAt: '-1' });
+			.sort({ recentMessage: '-1' });
 
 		results = await User.populate(results, { path: 'recentMessage.sender' });
 		res.status(200).send(results);
