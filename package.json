@@ -1,19 +1,19 @@
 {
-  "name": "xyaxis",
-  "version": "1.0.0",
-  "description": "chat app",
-  "main": "",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sujitIwale/xyaxis.git"
-  },
-  "author": "Harshal Kaigaonkar And Sujit Iwale",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/sujitIwale/xyaxis/issues"
-  },
-  "homepage": "https://github.com/sujitIwale/xyaxis#readme"
+	"name": "xyaxis",
+	"version": "1.0.0",
+	"description": "A WebRTC SFU Implementation for Voice and Video Streaming.",
+	"main": "server.js",
+	"repository": "https://github.com/xyaxis-co/xyaxis.git",
+	"author": "harshalkaigaonkar <harshalkaigaonkar31@gmail.com>",
+	"license": "MIT",
+	"private": false,
+	"devDependencies": {
+		"eslint": "^7.32.0",
+		"eslint-config-airbnb-base": "^14.2.1",
+		"eslint-config-node": "^4.1.0",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-import": "^2.24.2",
+		"eslint-plugin-node": "^11.1.0",
+		"prettier": "^2.4.0"
+	}
 }
