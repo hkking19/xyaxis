@@ -7,6 +7,7 @@
 	"author": "harshalkaigaonkar <harshalkaigaonkar31@gmail.com>",
 	"license": "MIT",
 	"private": false,
+	"type": "module",
 	"scripts": {
 		"node": "node server.js",
 		"nodemon": "nodemon server.js"
@@ -17,7 +18,7 @@
 		"dotenv": "^10.0.0",
 		"express": "^4.17.1",
 		"jsonwebtoken": "^8.5.1",
-		"webrtc-adapter": "^8.1.0"
+		"wrtc": "^0.4.7"
 	},
 	"devDependencies": {
 		"eslint": "^7.32.0",
