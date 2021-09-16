@@ -1,0 +1,70 @@
+.container {
+    font-family: "Nunito", sans-serif;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+input {
+    width: 70%;
+    padding: 20px; padding: 7px;
+    font-size: 30px;
+    border: 1px solid #262936;
+    color: #fff;
+    background-color: #262936;
+    transition: background 0.5s;
+    -webkit-tranistion: background 0.5s;
+}
+
+input:focus {
+    color: #fff;
+  outline: 0;
+}
+
+.semiContainer {
+    background-color: #292c3a;
+    border-radius: 10px;
+    width: 70%;
+    height: 60%;
+    display: flex;
+    margin: 0px;
+    padding: 0px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.homePage {
+    font-family: "Nunito", sans-serif;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+button {
+    background-color: rgb(121, 75, 196);
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    align-self: center;
+    margin: 20px;
+    padding: 20px;
+    font-size: 25px;
+    transition: background 0.5s;
+    -webkit-transition: background 0.5s;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(90, 46, 160);
+}
+
+.semi-container {
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+
+}

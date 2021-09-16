@@ -1,0 +1,32 @@
+.field {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: #292c3a;
+    margin: 30px;
+    position: relative;
+}
+.Stage , .Audience {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+}
+
+.Stage {
+
+}
+.Audience {
+}
+
+hr {
+    width: 90%;
+}
+.head {
+    font-size: 25px;
+}
+.footer {
+    position: sticky;
+    bottom: 0;
+}

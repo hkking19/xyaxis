@@ -1,0 +1,19 @@
+.header {
+    position: relative;
+    background-color: #292C3A;
+    height: 80px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.user {
+    display: block;
+    width: 250px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
