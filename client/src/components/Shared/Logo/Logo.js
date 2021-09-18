@@ -1,9 +1,11 @@
 import React from "react";
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './Logo.css';
 
 const Logo = ({styles}) => (
-	<div style={styles} className='main-logo'>
+	<Link to='/'>
+		<div style={styles} className='main-logo'>
 		<svg
 			version='1.0'
 			xmlns='http://www.w3.org/2000/svg'
@@ -30,6 +32,7 @@ const Logo = ({styles}) => (
 			</g>
 		</svg>
 	</div>
+	</Link>
 );
 
 Logo.propTypes = {
