@@ -5,7 +5,7 @@ const Anonymous = () => {
     return (
         <div>
             {hi}
-            Hello
+            Wrong page
         </div>
     )
 }

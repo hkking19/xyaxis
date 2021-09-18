@@ -13,7 +13,7 @@ const NewOrJoinStage = () => {
                     <input type='text' placeholder='Stage Code' />
                     <div className='semi-container'>
                         <button type='submit'>Create A New Stage</button>
-                        <button type='submit'>Join Stage as Audience</button>
+                        <button type='submit'>Join as Audience</button>
                     </div>
                 </div>
             </div>

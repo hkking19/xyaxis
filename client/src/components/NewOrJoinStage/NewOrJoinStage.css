@@ -47,6 +47,7 @@ input:focus {
 button {
     background-color: rgb(121, 75, 196);
     border: none;
+    width: 100%;
     border-radius: 10px;
     color: #fff;
     align-self: center;
@@ -66,5 +67,5 @@ button:hover {
     margin: 30px;
     display: flex;
     flex-direction: column;
-
+    width: 70%;
 }
