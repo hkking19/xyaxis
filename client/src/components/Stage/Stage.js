@@ -1,167 +1,51 @@
-import React from 'react';
+/* eslint-disable no-undef */
+import React, { useEffect, useRef, useState } from 'react';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import './Stage.css';
 
 const Stage = () => {
-    const hi = 'hi';
-    console.log(hi);
+    const [Audience, setAudience] = useState([])
+    const streamerVideo = useRef();
+    useEffect(async () => {
+        setAudience([
+            {
+                name:"hello"
+            },
+            {
+                name:"2"
+            },
+            {
+                name:"4"
+            },
+            {
+                name:"5"
+            },
+            {
+                name:"hello"
+            },
+            {
+                name:"hello"
+            },
+        ])
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        streamerVideo.current.srcObject = stream;
+    }, [])
+
     return (
         <div>
             <Header />
             <div className='field'>
-                    <p className='head'>Stage</p>
+                <p className='head'>Stage</p>
                 <div className='Stage'>
-                    <p>stage</p>
-                    <p>stage</p>
-                    <p>stage</p>
-                    <p>stage</p>
-                    <p>stage</p>
-                    <p>stage</p>
-                    <p>stage</p>
-                    <p>stage</p>
-                    <p>stage</p>
-                    <p>stage</p>
-                    <p>stage</p>
-                    <p>stage</p>
-                    <p>stage</p>
-                    <p>stage</p>
-                    <p>stage</p>
+                    <video id="vid" autoPlay ref={streamerVideo}>
+                        <track kind="captions" default/>
+                    </video>
                 </div>
                 <hr />
-                    <p className='head'>Audience</p>
+                <p className='head'>Audience</p>
                 <div className='Audience'>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
-                    <p>Audience</p>
+                    {Audience.map(data => <p>{data.name}</p>)}
                 </div>
             </div>
             <div className='footer'>

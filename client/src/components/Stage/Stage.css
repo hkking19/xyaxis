@@ -11,14 +11,15 @@
 .Stage , .Audience {
     display: flex;
     flex-wrap: wrap;
-    width: 90%;
 }
 
 .Stage {
-
+    width: 60%;
+    border: 10px solid rgb(121, 75, 196);
+    border-radius: 20px;
 }
-.Audience {
-}
+/* .Audience {
+} */
 
 hr {
     width: 90%;
@@ -29,4 +30,10 @@ hr {
 .footer {
     position: sticky;
     bottom: 0;
+}
+
+#vid {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
 }
